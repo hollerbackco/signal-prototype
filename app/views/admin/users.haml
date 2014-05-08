@@ -1,0 +1,60 @@
+%h1 Users
+%p
+  %a{href: "/madmin/users"} All
+  %a{href: "/madmin/users?android"} Android
+  %form{ :action => "/madmin/users/find", :method => "get"}
+    %fieldset
+      %label{:for => :username_or_email} Username or Email:
+      %input{:type => "text", :name => :username_or_email, :class => "text"}
+      %input{:type => "submit", :value => "Search", :class => "button"}
+%table.table.table-bordered
+  %thead
+    %tr
+      %td Id
+      %td Username
+      %td Email
+      %td Verify Code
+      %td Phone
+      %td Conversations
+      %td Videos (S/R)
+      %td Video Invites
+      %td Joined
+      %td Active
+      %td App Version
+      %td Devices
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          %a{href: "/madmin/users/#{user.id}"}
+            = user.id
+        %td= user.username
+        %td= user.email
+        %td= user.verification_code
+        %td= user.phone_normalized
+        %td= user.memberships.count
+        %td= "#{user.messages.sent.count}/#{user.messages.received.count}"
+        %td= user.invites.count
+        %td.date
+          %span{"data-time" => (user.created_at.to_i * 1000)}= user.created_at
+        - if user["last_active_at"]
+          %td
+            %span #{user["last_active_at"].to_pretty}
+        - else
+          %td= ""
+        %td= user.last_app_version
+        %td= user.device_names
+= will_paginate(@users)
+
+:javascript
+  $(document).ready(function() {
+    var datecopy = $(".date");
+
+    datecopy.each(function(el) {
+      var timeString = $(this).attr("data-time");
+      var unixTimestamp = parseInt(timeString);
+      var date = new Date(unixTimestamp);
+
+      $(this).html(date.toLocaleString());
+    })
+  })

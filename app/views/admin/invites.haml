@@ -1,0 +1,30 @@
+%h1 Video Invites
+%table.table.table-bordered
+  %thead
+    %tr
+      %td Inviter
+      %td Phone
+      %td Accepted
+      %td Sent At
+  %tbody
+    - @invites.each do |invite|
+      %tr
+        %td= invite.inviter.username
+        %td= invite.phone
+        %td= invite.accepted
+        %td
+          %span.date{"data-time" => (invite.created_at.to_i * 1000)}= invite.created_at
+= will_paginate @invites
+
+:javascript
+  $(document).ready(function() {
+    var datecopy = $(".date");
+
+    datecopy.each(function(el) {
+      var timeString = $(this).attr("data-time");
+      var unixTimestamp = parseInt(timeString);
+      var date = new Date(unixTimestamp);
+
+      $(this).html(date.toLocaleString());
+    })
+  })

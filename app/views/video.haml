@@ -1,0 +1,28 @@
+%section.content
+  .video-container
+    .watermark.clearfix
+      .wordmark= image_tag "hollerback-wordmark.png"
+    .instructions
+      tap to play
+    %img.poster{src: @thumb_url, width: "100%"}
+    .play-icon= image_tag "play-icon.png"
+    %video{poster: @thumb_url, preload: "auto", controls: "controls"}
+      %source{src: @video_url, type: "video/mp4"}
+
+  .explain
+    %strong #{@name}
+    is waiting for your response on Hollerback. It's Free.
+
+  .actions
+    .store-badge.ios-store
+      %a{href: "http://www.hollerback.co/beta/from-#{@name}"}= image_tag "appstore.png"
+
+  :javascript
+    window.onload = function() {
+      var video = document.getElementsByTagName('video')[0];
+      var poster = document.getElementsByClassName('poster')[0];
+      poster.onclick = function() {
+        $(".video-container").addClass("playing")
+        video.play();
+      };
+    };

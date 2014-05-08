@@ -1,0 +1,11 @@
+%section.content
+  %section.explain
+    %p be the first to know when we launch.
+    %p leave us your email
+  %section.email.form
+    - if @errors
+      - @errors.each do |key, error|
+        %p.alert.error= error
+    %form{action: "/waitlist", method: "POST"}
+      %input{name: "email", type: "text", placeholder: "email:"}
+      %input.primary-action.action-button.primary.button{type: "submit", value: "let me know"}

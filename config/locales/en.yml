@@ -1,0 +1,48 @@
+en:
+  meta:
+    title: Hollerback
+    description: |
+      chat with friends through
+      <br />
+      short video messages
+    keywords:  iphone, ios, app, video, facetime, conversations
+  activerecord:
+    errors:
+      messages:
+        blank: "cannot be blank"
+        taken: "is taken"
+        invalid: "is invalid"
+  pages:
+    test:
+      meta:
+        title: Test Hollerback
+        description: help us test Hollerback
+        description: help us test Hollerback
+      primary: Download Hollerback
+
+  splash:
+    primary: tell me more
+  promotion:
+    meta:
+      title: Hollerback - Help us Launch
+    a:
+      description: |
+        Help us launch Hollerback.
+      step1:
+        primary: Log In with Twitter
+      step2:
+        description: We'll send a single tweet from your account on the day of the launch.
+    b:
+      description: |
+        Help us launch Hollerback.
+      step1:
+        description: Enter your email to enter
+        primary: Submit
+      step2:
+        description: And we'll select a winner.
+  entries:
+    explanation_html: |
+      Share this unique link to earn more entries.
+      <br />
+      Friends and the people they invite both count as an entry.
+  thanks: Thanks from your friends on the Hollerback Team

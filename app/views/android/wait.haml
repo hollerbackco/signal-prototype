@@ -1,0 +1,8 @@
+%form{method: "POST", action: @post_action}
+  - if @error_message
+    %h2.error-message= @error_message
+  - else
+    %h2 Tell me when the Android app is ready
+  %input{type: "text", name: "phone", placeholder: "phone number"}
+  %input{type: "text", name: "email", placeholder: "email"}
+  %input.button.primary{type: "submit", value: "submit"}

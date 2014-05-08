@@ -1,0 +1,76 @@
+!!! 5
+-# paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+<!--[if lt IE 7]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if gt IE 8]><!-->
+%html.no-js{ :lang => "en" }
+  <!--<![endif]-->
+  %head
+    %meta{ :charset => "utf-8" }/
+
+    -# Always force latest IE rendering engine (even in intranet) & Chrome Frame
+    -# Remove this if you use the .htaccess
+    %meta{ "http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1" }/
+
+    %title= "Admin | Hollerback"
+    %meta{ :name => "description", :content => "" }/
+    %meta{ :name => "keywords", :content => t("meta.description") }/
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1.0" }/
+
+    = stylesheet_tag "admin"
+    = javascript_tag "web"
+    = tracking_code(:account => settings.google_analytics_key)
+
+    :css
+      body {
+        margin-top: 60px;
+      }
+    :javascript
+      window.addEventListener("load",function() {
+        // Set a timeout...
+        setTimeout(function(){
+          // Hide the address bar!
+          window.scrollTo(0, 1);
+        }, 0);
+      });
+    :javascript
+      $(document).ready(function() {
+        var datecopy = $(".date");
+
+        datecopy.each(function(el) {
+          var timeString = $(this).attr("data-time");
+          var unixTimestamp = parseInt(timeString);
+          var date = new Date(unixTimestamp);
+
+          $(this).html(date.toLocaleString());
+        })
+      })
+
+  %body
+    %header.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-brand Hollerback
+        %nav.collapse.navbar-collapse.bs-navbar-collapse
+          %ul.nav.navbar-nav
+            %li
+              %a{href: "/madmin"} Messages
+            %li
+              %a{href: "/madmin/users"} Users
+            %li
+              %a{href: "/madmin/app_links"} App Downloads
+            %li
+              %a{href: "/madmin/invites"} Invites
+            %li
+              %a{href: "/madmin/waitlist"} Waitlist
+            %li
+              %a{href: "/madmin/metrics"} Metrics
+            %li
+              %a{href: "/madmin/metrics"} Settings
+            %li
+              %a{href: "http://dashboard.hollerback.co/main"} Dashboard
+            %li
+              %a{href: "/madmin/exceptions"} App Exceptions
+    .container
+      %section
+        = yield

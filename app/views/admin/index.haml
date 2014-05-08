@@ -1,0 +1,89 @@
+- if @broken.any?
+  %h1 Broken Videos
+  %table.table.table-bordered
+    %thead
+      %tr
+        %td Id
+        %td Sender
+        %td Group Name
+        %td Members
+        %td Filename
+        %td Created At
+    %tbody
+      - @broken.each do |video|
+        - if video.user.blank?
+          %tr
+            %td blank user
+        - else
+          %tr
+            %td= video.id
+            %td
+              %a{href: "/madmin/users/#{video.user.id}"}
+                = video.user.username
+            %td
+              = video.conversation.name
+            %td
+              = video.conversation.member_names
+              = "(#{video.conversation_id})"
+            %td= video.filename
+            %td
+              %span.date{"data-time" => (video.created_at.to_i * 1000)}= video.created_at
+%h1 Messages
+%table.table.table-bordered
+  %thead
+    %tr
+      %td Id
+      %td Sender
+      %td Group Name
+      %td Members
+      %td Content
+      %td Created At
+      %td Subtitle
+  %tbody
+    - @contents.each do |content|
+      - if content.user.blank?
+        %tr
+          %td blank user
+      - else
+        %tr
+          %td= content.id
+          %td
+            %a{href: "/madmin/users/#{content.user.id}"}
+              = content.user.username
+          %td= content.conversation.name
+          %td
+            %a{href: "/madmin/conversations/#{content.conversation_id}"}
+              = content.conversation.member_names
+              = "(#{content.conversation_id})"
+          -if content.type == "Video"
+            %td= content.filename
+          -if content.type == "Text"
+            %td
+              %a{onclick: "toggle_visibility(#{content.id});"} Show Message
+              %div{id: content.id,  style: "display: none;"}= content.filename
+          %td
+            %span.date{"data-time" => (content.created_at.to_i * 1000)}= content.created_at
+          %td
+            %span.subtitle
+= will_paginate(@contents)
+
+:javascript
+  $(document).ready(function() {
+    var datecopy = $(".date");
+
+    datecopy.each(function(el) {
+      var timeString = $(this).attr("data-time");
+      var unixTimestamp = parseInt(timeString);
+      var date = new Date(unixTimestamp);
+
+      $(this).html(date.toLocaleString());
+    })
+  })
+
+  function toggle_visibility(id) {
+         var e = document.getElementById(id);
+         if(e.style.display == 'block')
+            e.style.display = 'none';
+         else
+            e.style.display = 'block';
+      }

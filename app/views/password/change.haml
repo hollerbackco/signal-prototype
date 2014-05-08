@@ -1,0 +1,8 @@
+%form{method: "POST", action: @post_action}
+  - if @error_message
+    %h2.error-message= @error_message
+  - else
+    %h2 Change your password
+  %input{type: "password", name: "password", placeholder: "new password"}
+  %input{type: "password", name: "confirm", placeholder: "confirm password"}
+  %input.button.primary{type: "submit", value: "change password"}

@@ -1,0 +1,271 @@
+@import 'compass';
+$border: #eee;
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #666;
+    font-weight: normal;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #666;
+    font-weight: normal;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #666;
+    font-weight: normal;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #666;
+    font-weight: normal;
+}
+
+
+.button.primary,
+input[type=submit].primary {
+  display: block;
+  @include background-image(linear-gradient(#1abaed, #0fa2e8, #0186e2));
+  @include text-shadow(1px 1px 1px rgba(0,0,0,.2));
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 55px;
+  padding: 5px;
+  color: #fff;
+}
+
+
+.alert {
+  text-align: left;
+  color: green;
+}
+
+body {
+  background: #0da7fd;
+  font-family: "Helvetica Neue", "Helvetica", arial, sans-serif;
+  color: #fff;
+  margin: 15px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica Neue", "Helvetica", arial, sans-serif;
+  font-weight: normal;
+}
+
+.tagline {
+  font-weight: 300;
+  line-height: 1.5em;
+}
+
+header {
+  text-align: center;
+  &> div {
+    display: inline-block;
+  }
+}
+
+ol li {
+  padding: 10px 0;
+}
+
+.page {
+  background: #fff;
+  color: #000;
+
+  .container {
+    margin: 100px auto 30px;
+    width: 600px;
+  }
+
+  #header {
+    display: block;
+    float: left;
+    width: 100px;
+    margin-left: -140px;
+
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        display: block;
+        margin: 0;
+        padding: 0;
+
+        a {
+          display: block;
+          padding: 10px 20px 0;
+          text-decoration: none;
+          color: #000;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.5em;
+  }
+
+  #footer {
+    padding: 20px 0;
+    width: 100%;
+    bottom: 0;
+    color: #999;
+    font-size: 13px;
+
+    .copyright {
+    }
+
+    nav {
+      float: right;
+      display: block;
+
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        display: inline-block;
+      }
+
+      a {
+        text-decoration: none;
+        font-weight: normal;
+        padding: 0 10px;
+        color: #999;
+
+        &:hover {
+          color: #ccc;
+        }
+      }
+    }
+  }
+}
+
+section.content {
+  h2 {
+    font-size: 1.8em;
+    padding: 0 0 1em;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .video-container {
+    position: relative;
+    background: #000;
+    color: #fff;
+
+    &> img {
+      position: relative;
+      z-index: 10;
+      display: block;
+    }
+
+    .watermark {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 11;
+
+      .wordmark {
+        width: 115px;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .instructions {
+      position: absolute;
+      z-index: 11;
+      text-align: center;
+      bottom: 15px;
+      width: 100%;
+      color: #fff;
+    }
+
+    .play-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 11;
+    }
+
+    video {
+      display: block;
+      margin: 0;
+      padding: 0;
+      height: 1px;
+      width: 1px;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 1;
+      opacity: 0;
+    }
+
+    &.playing {
+      .instructions {
+        display: none;
+      }
+
+      .poster {
+        opacity: 0;
+      }
+
+      .play-icon {
+        display: none;
+      }
+
+      video {
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+  }
+
+  .explain {
+    text-align: left;
+    font-size: 1.15em;
+    margin: 1em 0;
+  }
+
+  .store-badge img {
+    width: 100%;
+  }
+
+  .form {
+    padding: 0 20px 20px;
+
+    input[type=text] {
+      width: 100%;
+      padding: 20px;
+      font-size: 20px;
+      -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+      -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+      box-sizing: border-box;         /* Opera/IE 8+ */
+    }
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  body.page .container {
+    width: 100%;
+    margin: 0 10px;
+  }
+}
+
+@media only screen and (max-width: 480px){
+  body.page .container {
+    width: 100%;
+    margin: 0 10px;
+  }
+}

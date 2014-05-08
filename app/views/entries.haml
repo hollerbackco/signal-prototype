@@ -1,0 +1,24 @@
+- url = @pledger.present? ? "http://hollerback.co/fly/#{@pledger.username}" : "http://hollerback.co/fly"
+%section.sharing
+  -#%h3= t "entries.explanation_html"
+  %input{type: "text", value: url}
+  .share-buttons
+    %a{href: "http://twitter.com/share?text=Sign up for this new prelaunch app for a chance to win a pair of plane tickets&url=#{url}"}= image_tag "share-tw.png"
+    %a{href: "http://www.facebook.com/dialog/feed?app_id=401561826617889&link=#{url}&redirect_uri=http://hollerback.co/thanks"}
+      = image_tag "share-fb.png"
+- if false #@pledger.present?
+  %section.entries
+    %h2.smaller Below are your entries to win.
+    .entries-summary
+      .row.entries-count
+        %span.count= @pledger.entries_count
+        %span.label Your Entries
+      .row.entries-friends
+        %span.count= @pledger.friends.count
+        %span.label Friends who signed up using your link
+      .row.entries-friends-of-friends
+        %span.count= @pledger.friends_of_friends.count
+        %span.label People who signed up using your friends' link
+      .row.total-entries
+        %span.label Total Entries:
+        %span.count= @pledger.total_count

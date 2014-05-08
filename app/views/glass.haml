@@ -1,0 +1,15 @@
+%section.participate.clearfix
+  .right-box
+    %h2.box.smaller= t("promotion.a.description")
+    .steps.box
+      .step1.step
+        %h3 step 1
+        %a.button.blue.primary.with-icon{:href => "/auth/twitter"}
+          %span.twitter-bird
+          %span.text= t("promotion.a.step1.primary")
+      .step2.step
+        %h3 step 2
+        %p.explanation= t "promotion.a.step2.description"
+    .example.box.tweet-sample
+      %h4 Your tweet will look like this:
+      = image_tag "tweet.png"

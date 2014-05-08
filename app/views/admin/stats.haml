@@ -1,0 +1,227 @@
+%h1 Stats
+%article
+  %h3 growth
+  %p invites/users * conversion rate
+  #invitesSentCount
+  #usersCount
+  #conversionRate
+  #kpi
+%article
+  %h2 Reminder Funnel
+  #reminder-funnel
+%article
+  %h2 Reminder Invite Funnel
+  #invite-reminders
+  #invite-reminders-users
+%article
+  %h2 Invite Funnel
+  #invite-funnel
+%article
+  %h2 Active Users
+  #active-users
+
+%article
+  %h2 Videos Sent
+  #videos-sent
+
+%article
+  %h2 Texts Sent
+  #texts-sent
+
+%article
+  %h2 Number of Users who Sent
+  #users-who-sent
+
+
+%article
+  %h2 Videos Watched
+  #videos-watched
+
+
+:javascript
+  var Keen=Keen||{configure:function(e){this._cf=e},addEvent:function(e,t,n,i){this._eq=this._eq||[],this._eq.push([e,t,n,i])},setGlobalProperties:function(e){this._gp=e},onChartsReady:function(e){this._ocrq=this._ocrq||[],this._ocrq.push(e)}};(function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src=("https:"==document.location.protocol?"https://":"http://")+"dc8na2hxrj29i.cloudfront.net/code/keen-2.1.0-min.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+
+  // Configure the Keen object with your Project ID and (optional) access keys.
+  Keen.configure({
+    projectId: "#{ENV["KEEN_PROJECT_ID"]}",
+    readKey: "#{ENV["KEEN_READ_KEY"]}"    // required for doing analysis
+  });
+
+  // Reminder funnel init
+  var showReminderFunnel = function(callback) {
+    var step1 = new Keen.Step("push:message_reminder", {
+      name: "Push Reminder",
+      actorProperty: "user.id"
+    });
+
+    var step2 = new Keen.Step("conversations:list", {
+      name: "App Open",
+      actorProperty: "user.id"
+    });
+
+    var step3 = new Keen.Step("video:create", {
+      name: "Sent Video",
+      actorProperty: "user.id"
+    });
+
+    var inviteFunnel = new Keen.Funnel([step1,step2,step3], {
+      "timeframe": {
+        "start": "2013-11-23T01:08:33.883Z",
+        "end": (new Date()).toISOString()
+      }
+    });
+
+    inviteFunnel.draw(document.getElementById("reminder-funnel"), {
+      title: "Reminder Funnel"
+    });
+  };
+
+  // Invitation reminder funnel init
+  var showInviteReminderFunnel = function(callback) {
+    var step1 = new Keen.Step("push:invite_reminder", {
+      name: "Invite Reminder",
+      actorProperty: "invite_id"
+    });
+
+    var step2 = new Keen.Step("invite:accept", {
+      name: "Accept Invitation",
+      actorProperty: "invite_id"
+    });
+
+    var inviteFunnel = new Keen.Funnel([step1, step2], {
+      "timeframe": {
+        "start": "2013-11-23T01:08:33.883Z",
+        "end": (new Date()).toISOString()
+      }
+    });
+
+    //var inviteFunnel = new Keen.Funnel([step1])
+
+    inviteFunnel.draw(document.getElementById("invite-reminders-users"), {
+      title: "Invite Reminder Funnel"
+    });
+  };
+
+  var showInviteFunnel = function(callback) {
+    var step1 = new Keen.Step("users:invite", {
+      name: "Was Invited",
+      actorProperty: "invited_phone"
+    });
+
+    var step2 = new Keen.Step("users:new", {
+      name: "Registered",
+      actorProperty: "user.phone"
+    });
+
+    var step3 = new Keen.Step("video:create", {
+      name: "Sent Video",
+      actorProperty: "user.phone"
+    });
+
+    var step4 = new Keen.Step("users:invite", {
+      name: "Invited Someone",
+      actorProperty: "user.phone"
+    });
+
+    var inviteFunnel = new Keen.Funnel([step1,step2,step3,step4]);
+
+    inviteFunnel.draw(document.getElementById("invite-funnel"), {
+      title: "Invite Funnel"
+    });
+
+    inviteFunnel.getResponse(function(response) {
+      callback(response);
+    });
+  };
+
+  Keen.onChartsReady(function() {
+    var inviteSent = new Keen.Metric("users:invite",{
+      analysisType: "count_unique",
+      targetProperty: "invited_phone"
+    });
+
+    inviteSent.draw(document.getElementById("invitesSentCount"), {
+      label: "Invites"
+    });
+
+    inviteSent.getResponse(function(response) {
+      var invitesSentCount = response.result;
+
+      var users = new Keen.Metric("users:new", {
+        analysisType: "count_unique",
+        targetProperty: "user.id"
+      });
+      users.draw(document.getElementById("usersCount"), {
+        label: "Users"
+      });
+
+      users.getResponse(function(response) {
+        var usersCount = response.result;
+
+        showInviteFunnel(function(response){
+          console.log(response);
+          console.log(invitesSentCount);
+          console.log(usersCount);
+          var conversionRate = response.result[1]/response.result[0];
+          var kpi = (invitesSentCount/usersCount) * (conversionRate);
+          $("#kpi").html(kpi + " users/users");
+        });
+      });
+    });
+
+    showReminderFunnel();
+    showInviteReminderFunnel();
+
+    var series = new Keen.Series("video:create", {
+      analysisType: "count",
+      timeframe: "this_14_days",
+      interval: "daily"
+    });
+
+    series.draw(document.getElementById("videos-sent"), {
+      label: "Videos sent over time"
+    });
+
+    var texts = new Keen.Series("text:create", {
+          analysisType: "count",
+          timeframe: "this_14_days",
+          interval: "daily"
+        });
+
+    texts.draw(document.getElementById("texts-sent"), {
+      label: "Texts sent over time"
+    });
+
+    var users_who_sent = new Keen.Series("video:create", {
+              analysisType: "count_unique",
+              targetProperty: "user.id",
+              timeframe: "this_14_days",
+              interval: "daily"
+            });
+
+        users_who_sent.draw(document.getElementById("users-who-sent"), {
+          label: "Unique Users who Sent"
+        });
+
+    var watch = new Keen.Series("video:watch", {
+      analysisType: "count_unique",
+      targetProperty: "message_id",
+      timeframe: "this_14_days",
+      interval: "daily"
+    });
+
+    watch.draw(document.getElementById("videos-watched"), {
+      label: "Videos watched over time"
+    });
+
+    var users = new Keen.Series("conversations:list", {
+      analysisType: "count_unique",
+      timeframe: "this_14_days",
+      interval: "daily",
+      targetProperty: "user.id"
+    });
+
+    users.draw(document.getElementById("active-users"), {
+      label: "Users who refreshed convo list"
+    });
+  });

@@ -1,0 +1,7 @@
+%form#invite-form{method: "POST", action: "/forgotpw"}
+  - if @error_message
+    %h2.error-message= @error_message
+  - else
+    %h2 Forgot your password?
+  %input{type: "text", name: "email", placeholder: "enter your email"}
+  %input.button.primary{type: "submit", value: "change password"}

@@ -1,0 +1,22 @@
+GET  /me/friends
+#description: returns a list of a users contact list, it also includes
+a recent friends list.
+
+{
+  recents: [contact, .. , contact],
+  friends: [contact, .. , contact]
+}
+
+
+POST /me/friends/add
+#description: adds a person to the users friends list
+
+params
+  user_id
+
+
+POST /me/friends/remove
+#description: removes a person from the users friends list
+
+params
+  user_id

@@ -1,0 +1,35 @@
+%form{:action => "/madmin/settings", :method => "post"}
+  %p
+    %label{:for => "sms_invite_reminder"} SMS Invite Reminder Copy
+    %br
+    %textarea{:name => "sms_invite_reminder"}
+      = @sms_invite_reminder
+  %p
+    %input{:type => "submit", :value => "submit"}
+
+%form{:action => "/madmin/settings", :method => "post"}
+  %p
+    %label{:for => "min_ios_version_for_force_upgrade"} Min IOS Version for Force Upgrade
+    %br
+    %textarea{:name => "min_ios_version_for_force_upgrade"}
+    = @min_ios_version_for_force_upgrade
+  %p
+    %input{:type => "submit", :value => "submit"}
+
+%form{:action => "/madmin/settings", :method => "post"}
+  %p
+    %label{:for => "min_beta_ios_version_for_force_upgrade"} Min Beta IOS Version for Force Upgrade
+    %br
+    %textarea{:name => "min_beta_ios_version_for_force_upgrade"}
+    = @min_beta_ios_version_for_force_upgrade
+  %p
+    %input{:type => "submit", :value => "submit"}
+
+%form{:action => "/madmin/settings", :method => "post"}
+  %p
+    %label{:for => "invite_reminder_flag"} 24hrs Invite Reminder
+    %br
+    %input{:type => "radio", name: "invite_reminder_flag", value: "true", checked: @invite_reminder_flag == "true"}  Enabled
+    %input{:type => "radio", name: "invite_reminder_flag", value: "false", checked: @invite_reminder_flag == "false"}  Disabled
+  %p
+    %input{:type => "submit", :value => "submit"}

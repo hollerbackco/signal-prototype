@@ -1,0 +1,30 @@
+%h1 Today's IOS App Exceptions
+%p
+%table.table.table-bordered
+  %thead
+    %tr
+      %td App Versions
+      %td Exception
+      %td Count
+      %td User Ids
+  %tbody
+    - @entries.each do |entry|
+      %tr
+        %td= entry["app_version"].join(",")
+        %td= entry["exception"]
+        %td= entry["count"]
+        %td= entry["user_id"].join(",")
+
+
+:javascript
+  $(document).ready(function() {
+    var datecopy = $(".date");
+
+    datecopy.each(function(el) {
+      var timeString = $(this).attr("data-time");
+      var unixTimestamp = parseInt(timeString);
+      var date = new Date(unixTimestamp);
+
+      $(this).html(date.toLocaleString());
+    })
+  })

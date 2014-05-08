@@ -1,0 +1,1 @@
+heroku pgbackups:transfer HEROKU_POSTGRESQL_COPPER_URL lit-sea-1934::HEROKU_POSTGRESQL_ROSE_URL -a calm-peak-4397 --confirm calm-peak-4397

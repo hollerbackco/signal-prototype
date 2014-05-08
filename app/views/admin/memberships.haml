@@ -1,0 +1,53 @@
+.panel.panel-default
+  .panel-heading Conversation
+  .list-group
+    .list-group-item
+      %strong Id
+      = @conversation.id
+    .list-group-item
+      %strong Name
+      = @conversation.name || "N/A"
+    .list-group-item
+      %strong Members
+      = @conversation.member_names
+    .list-group-item
+      %strong Videos Sent
+      = @messages.count
+    - if @conversation.memberships.first.most_recent_subtitle == "ttyl"
+      .list-group-item
+        %span.label.label-success ttyl
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %td Id
+      %td Sender
+      %td Content
+      %td Created At
+      %td TTYL
+  %tbody
+    - @messages.each do |message|
+      %tr
+        %td= message.id
+        %td
+          %a{href: "/madmin/users/#{message.sender_id}"}= message.sender_name
+        %td
+          - if message.type == 'video'
+            %a{href: message.url}= message.url
+          - if message.type == 'text'
+            %a{onclick: "toggle_visibility(#{message.id});"} Show Message
+            %div{id: message.id,  style: "display: none;"}= message.text_content
+        %td
+          %span.date{"data-time" => (message.created_at.to_i * 1000)}= message.created_at
+        %td
+          %span.subtitle
+            - if message.subtitle.present? and message.subtitle == "ttyl"
+              Y
+:javascript
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }

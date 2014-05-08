@@ -1,0 +1,156 @@
+@import 'compass';
+$border: #eee;
+
+@font-face {
+  font-family: MuseoSans;
+  src: font_url('MuseoSans_500.otf');
+  font-weight: 500;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #666;
+    font-weight: normal;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #666;
+    font-weight: normal;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #666;
+    font-weight: normal;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #666;
+    font-weight: normal;
+}
+
+
+.button.primary,
+input[type=submit].primary {
+  display: block;
+  @include background-image(linear-gradient(#1abaed, #0fa2e8, #0186e2));
+  @include text-shadow(1px 1px 1px rgba(0,0,0,.2));
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 55px;
+  padding: 5px;
+  color: #fff;
+}
+
+.button.primary:hover,
+input[type=submit].primary:hover,
+.button.primary:focus,
+input[type=submit].primary:focus {
+  background: #0fa2e8;
+}
+
+
+.alert {
+  text-align: left;
+  color: green;
+}
+
+body, .button {
+  font-family: MuseoSans, Times, serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: MuseoSans, Times, serif;
+  font-weight: normal;
+}
+
+header {
+  text-align: center;
+  border-bottom: 1px solid $border;
+
+  h1 {
+    padding: 20px 5px 0;
+    margin-bottom: 0;
+
+    img {
+      display: inline-block;
+    }
+
+    .subtitle {
+      display: inline-block;
+      font-size: 14px;
+    }
+  }
+}
+
+section.content {
+  text-align: center;
+
+  h2 {
+    font-size: 1.8em;
+    padding: 10px 0;
+    border-bottom: 1px solid $border;
+    margin-bottom: 0;
+  }
+
+  .video-container {
+    background: #000;
+    color: #fff;
+
+    video {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .explain {
+    text-align: left;
+    margin: 30px 20px;
+    font-size: 20px;
+  }
+
+  .form {
+    padding: 0 20px 20px;
+
+    input[type=text] {
+      width: 100%;
+      padding: 20px;
+      font-size: 20px;
+      -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+      -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+      box-sizing: border-box;         /* Opera/IE 8+ */
+    }
+  }
+
+  .caption {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 15px 0;
+  }
+
+  .actions {
+    position: relative;
+    margin: 0 20px;
+  }
+
+  .button {
+    position: relative;
+    margin-left: -1px;
+    width: 100%;
+    margin-bottom: 0;
+
+    img {
+      top: 5px;
+      left: 5px;
+      position: absolute;
+    }
+    .push {
+      margin-left: 30px;
+    }
+  }
+
+  .secondary-action {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 15px 0;
+    color: #999;
+  }
+}
+

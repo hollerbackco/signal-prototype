@@ -1,0 +1,21 @@
+{
+    "video_cell_display_rules":{
+        "user":{
+            "thumb_gravity": "right",
+            "thumb_style": "round"
+        },
+
+        "others":{
+            "thumb_gravity": "left",
+            "thumb_style": "round"
+        }
+    },
+    "content_cell_display_rules":{
+        "user":{
+            "gravity": "right"
+        },
+        "others":{
+            "gravity": "left"
+        }
+    }
+}

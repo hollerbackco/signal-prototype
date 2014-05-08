@@ -1,0 +1,9 @@
+%h1 Waitlist (#{@waitlisters.count})
+%table.table.table-bordered
+  %thead
+    %tr
+      %td Email
+  %tbody
+    - @waitlisters.each do |waitlister|
+      %tr
+        %td= waitlister.email
