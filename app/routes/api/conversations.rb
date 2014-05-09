@@ -49,6 +49,14 @@ module HollerbackApp
       end
     end
 
+    post '/me/conversations/:id/follow' do
+      #TODO: fill in
+    end
+
+    post '/me/conversations/:id/unfollow' do
+      #TODO: fill in
+    end
+
     post '/me/conversations/:id/text' do
       if !ensure_params(:text, :guid)
         return error_json 400, msg: "missing text or guid fields"
