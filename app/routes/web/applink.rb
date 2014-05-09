@@ -1,8 +1,8 @@
 module HollerbackApp
   class WebApp < BaseApp
 
-    APP_DOWNLOAD_LINK = "http://appstore.com/hollerback"
-    ENTERPRISE_APP_DOWNLOAD_LINK = "http://www.hollerback.co/beta/test/master"
+    APP_DOWNLOAD_LINK = ""
+    ENTERPRISE_APP_DOWNLOAD_LINK = ""
     ALLOWED_LOCALES = ["AU", "NZ", "CA"]
     INVITE_COHORTS = ["psiu", "vip", "friendsvip", "vipnyc", "nycvip", "usc", "wes", "wesley", "socialsignin"]
 
