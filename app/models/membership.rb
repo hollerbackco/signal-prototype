@@ -51,10 +51,7 @@ class Membership < ActiveRecord::Base
 
     end
 
-    join_clause = ""
     join_clause = "LEFT OUTER JOIN messages ON memberships.id = messages.membership_id AND messages.seen_at is null AND CAST(messages.content->'guid' as text) is not null"
-
-
 
     collection = collection
     .joins(join_clause)

@@ -1,18 +1,19 @@
 module Signal
   class NotifyRecipients
-    attr_accessor :messages
 
-    def initialize(messages, opts={})
-      @messages = messages
-    end
-
-    def run
+    def self.on_new_message(messages)
       messages.each do |message|
         recipient = message.membership.user
         unless message.sender? || !message.membership.following?
-          notify_push message, recipient
+          NotifyRecipients.notify_push message.membership, recipient, message.content['text'], message.sender_name
         end
         #notify_mqtt message, recipient
+      end
+    end
+
+    def self.on_new_conversation(memberships, sender)
+      memberships.each do |membership|
+        NotifyRecipients.notify_push(membership, membership.user, membership.conversation.name, sender.also_known_as(:for => membership.user))
       end
     end
 
@@ -23,50 +24,34 @@ module Signal
       Signal::MQTT.delay.publish(channel, {})
     end
 
-    def notify_push(message, person)
-      membership = message.membership
-      badge_count = person.unseen_memberships_count
+    def self.notify_push(membership, recipient, push_copy, sender_name)
+      badge_count = recipient.unseen_memberships_count
 
-      # if(message.message_type == Message::Type::TEXT)
-      #   alert_msg = "#{message.sender_name}: #{message.content["text"]}"
-      # else
-      if(membership.conversation.members.count > 2)
-        alert_msg = "#{message.sender_name} sent a message"
+      if (membership.conversation.members.count > 2)
+        alert_msg = "#{sender_name} sent a message"
       else
-        alert_msg = "#{message.sender_name} sent you a message"
+        alert_msg = "#{sender_name} sent you a message"
       end
 
-      #end
-
-      Signal::Push.delay.send(person.id, {  #are we sending it to apple anyways?
-        alert: alert_msg,
-        badge: badge_count,
-        sound: "default",
-        content_available: true,
-        data: {uuid: SecureRandom.uuid, conversation_id: membership.id}
+      Signal::Push.delay.send(recipient.id, {#are we sending it to apple anyways?
+                                          alert: alert_msg,
+                                          badge: badge_count,
+                                          sound: "default",
+                                          content_available: true,
+                                          data: {uuid: SecureRandom.uuid, conversation_id: membership.id}
       }.to_json)
 
-      if(message.message_type == Message::Type::TEXT)
-        alert_msg = "#{message.sender_name}: #{message.content["text"]}"
-        person.devices.android.each do |device|
-          res = Signal::GcmWrapper.send_notification([device.token],                     #tokens
-                                                         Signal::GcmWrapper::TYPE::NOTIFICATION, #type
-                                                         {:message => alert_msg},                                #payload
-                                                         collapse_key: "new_message")        #options
+      alert_msg = "#{sender_name}: #{push_copy}"
+      recipient.devices.android.each do |device|
+        res = Signal::GcmWrapper.send_notification([device.token], #tokens
+                                                   Signal::GcmWrapper::TYPE::NOTIFICATION, #type
+                                                   {:message => alert_msg}, #payload
+                                                   collapse_key: "new_message") #options
 
-          puts res
-        end
-      else
-        person.devices.android.each do |device|
-          res = Signal::GcmWrapper.send_notification([device.token],                     #tokens
-                                                         Signal::GcmWrapper::TYPE::SYNC, #type
-                                                         nil,                                #payload
-                                                         collapse_key: "new_message")        #options
-
-          puts res
-        end
+        puts res
       end
-
     end
+
+
   end
 end

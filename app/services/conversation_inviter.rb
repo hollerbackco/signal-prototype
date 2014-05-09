@@ -58,6 +58,8 @@ module Signal
         end
 
         #TODO: Notify Recipients
+        memberships = Membership.where(:conversation_id => conversation.id, :following => false)
+        NotifyRecipients.on_new_conversation(memberships, inviter)
 
         p "actual invites: " + actual_invites.to_s
         run_analytics(actual_invites)
