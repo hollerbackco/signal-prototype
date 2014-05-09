@@ -1,4 +1,4 @@
-module HollerbackApp
+module SignalApp
   class ApiApp < BaseApp
 
     helpers do

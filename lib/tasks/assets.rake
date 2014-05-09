@@ -12,7 +12,7 @@ namespace :assets do
       Dir.mktmpdir do |dir|
         # grab video from s3
         begin
-          files = Hollerback::S3Cacher.get([video_key], Video::BUCKET_NAME, dir)
+          files = Signal::S3Cacher.get([video_key], Video::BUCKET_NAME, dir)
         rescue
           puts "no file"
           next
@@ -20,7 +20,7 @@ namespace :assets do
 
         # grab screenshot
         begin
-          movie =  Hollerback::Stitcher::Movie.new(files.first.to_s)
+          movie =  Signal::Stitcher::Movie.new(files.first.to_s)
           image = movie.screengrab dir, :large
 
           # sent the file to s3
@@ -42,9 +42,9 @@ namespace :assets do
 
   desc 'compile javascript assets'
   task :compile_js do
-    sprockets = HollerbackApp::WebApp.settings.sprockets
+    sprockets = SignalApp::WebApp.settings.sprockets
     asset     = sprockets['application.js']
-    outpath   = File.join(HollerbackApp::WebApp.settings.compile_path, 'js')
+    outpath   = File.join(SignalApp::WebApp.settings.compile_path, 'js')
     outfile   = Pathname.new(outpath).join('application.min.js') # may want to use the digest in the future?
 
     FileUtils.mkdir_p outfile.dirname
@@ -56,9 +56,9 @@ namespace :assets do
 
   desc 'compile css assets'
   task :compile_css do
-    sprockets = HollerbackApp::WebApp.settings.sprockets
+    sprockets = SignalApp::WebApp.settings.sprockets
     asset     = sprockets['application.css']
-    outpath   = File.join(HollerbackApp::WebApp.settings.compile_path, 'css')
+    outpath   = File.join(SignalApp::WebApp.settings.compile_path, 'css')
     outfile   = Pathname.new(outpath).join('application.min.css') # may want to use the digest in the future?
 
     FileUtils.mkdir_p outfile.dirname

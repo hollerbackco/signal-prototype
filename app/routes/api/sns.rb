@@ -1,9 +1,9 @@
 # session routes
-module HollerbackApp
+module SignalApp
   class ApiApp < BaseApp
     post '/sns/et' do
       obj = JSON.parse request.body.read
-      p obj 
+      p obj
       if obj.key? "Message"
         msg = JSON.parse obj["Message"]
         jobId = msg["jobId"]

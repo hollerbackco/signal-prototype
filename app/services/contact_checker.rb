@@ -1,4 +1,4 @@
-module Hollerback
+module Signal
   class ContactChecker
     attr_accessor :options
 
@@ -29,7 +29,7 @@ module Hollerback
       contacts = contacts - [user]
 
       if options[:include_will] and user
-        user.name = "Will Dennis - Cofounder of Hollerback"
+        user.name = "Will Dennis - Cofounder of Signal"
         contacts << user if user
       end
 

@@ -1,7 +1,7 @@
-module HollerbackApp
+module SignalApp
   class BaseApp < Sinatra::Base
     configure do
-      Hollerback::GcmWrapper::init #initialize gcm
+      Signal::GcmWrapper::init #initialize gcm
     end
   end
 end

@@ -39,7 +39,7 @@ class ConversationCreate
     #p "publish metric: users:invite:implicit with data: #{data}"
     #
     #if actual_invites.any?
-    #  Hollerback::BMO.say("#{user.username} invited #{actual_invites.count} people through a conversation")
+    #  Signal::BMO.say("#{user.username} invited #{actual_invites.count} people through a conversation")
     #end
   end
 end

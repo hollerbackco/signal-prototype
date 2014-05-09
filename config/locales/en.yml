@@ -1,6 +1,6 @@
 en:
   meta:
-    title: Hollerback
+    title: Signal
     description: |
       chat with friends through
       <br />
@@ -15,26 +15,26 @@ en:
   pages:
     test:
       meta:
-        title: Test Hollerback
-        description: help us test Hollerback
-        description: help us test Hollerback
-      primary: Download Hollerback
+        title: Test Signal
+        description: help us test Signal
+        description: help us test Signal
+      primary: Download Signal
 
   splash:
     primary: tell me more
   promotion:
     meta:
-      title: Hollerback - Help us Launch
+      title: Signal - Help us Launch
     a:
       description: |
-        Help us launch Hollerback.
+        Help us launch Signal.
       step1:
         primary: Log In with Twitter
       step2:
         description: We'll send a single tweet from your account on the day of the launch.
     b:
       description: |
-        Help us launch Hollerback.
+        Help us launch Signal.
       step1:
         description: Enter your email to enter
         primary: Submit
@@ -45,4 +45,4 @@ en:
       Share this unique link to earn more entries.
       <br />
       Friends and the people they invite both count as an entry.
-  thanks: Thanks from your friends on the Hollerback Team
+  thanks: Thanks from your friends on the Signal Team

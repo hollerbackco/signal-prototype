@@ -1,4 +1,4 @@
-module HollerbackApp
+module SignalApp
   class WebApp < BaseApp
     helpers ::Sinatra::Assets::Helpers
     helpers ::Sprockets::Helpers

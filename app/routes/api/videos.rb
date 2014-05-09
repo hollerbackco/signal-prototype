@@ -1,4 +1,4 @@
-module HollerbackApp
+module SignalApp
   class ApiApp < BaseApp
     get '/me/conversations/:conversation_id/videos' do
       begin

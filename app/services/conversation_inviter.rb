@@ -1,4 +1,4 @@
-module Hollerback
+module Signal
   class ConversationInviter
     attr_accessor :inviter, :conversation, :usernames, :phones, :name
 
@@ -20,7 +20,7 @@ module Hollerback
         usernames.each do |username|
           if user = User.find_by_username(username)
             next if conversation.members.exists?(user)
-            conversation.members << user
+            conversation.members << user #creates the membership
             if friendship = inviter.friendships.where(:friend_id => user.id).first
               friendship.touch
             end
@@ -56,6 +56,9 @@ module Hollerback
           conversation.name = name
           conversation.save
         end
+
+        #TODO: Notify Recipients
+
         p "actual invites: " + actual_invites.to_s
         run_analytics(actual_invites)
       end
@@ -99,6 +102,7 @@ module Hollerback
       conversation.members << inviter
 
       membership = inviter.memberships.find(:first, conditions: {conversation_id: conversation.id})
+      membership.following = true #as the creator follow the membership
       membership.save
 
       conversation

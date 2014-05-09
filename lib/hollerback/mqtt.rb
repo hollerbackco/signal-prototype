@@ -1,4 +1,4 @@
-module Hollerback
+module Signal
   class MQTT
 
     def self.client_options=(options)

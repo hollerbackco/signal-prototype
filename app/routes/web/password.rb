@@ -1,5 +1,5 @@
 # Reset Password Routes
-module HollerbackApp
+module SignalApp
   class WebApp < BaseApp
     helpers do
       def create_token(user_id)
@@ -42,7 +42,7 @@ module HollerbackApp
       Mail.deliver do
         to user.email
         from 'no-reply@hollerback.co'
-        subject 'Hollerback Password Change'
+        subject 'Signal Password Change'
 
         text_part do
           body "Change your password here:\n #{url}"

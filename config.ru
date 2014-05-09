@@ -19,7 +19,7 @@ use Rack::Parser, :parsers => {
 }
 
 map '/api' do
-  run HollerbackApp::ApiApp
+  run SignalApp::ApiApp
 end
 
 map '/sidekiq' do
@@ -30,10 +30,10 @@ end
   username == 'jnoh' && password == 'watchthis'
 end
 
-map HollerbackApp::WebApp.settings.assets_prefix do
-  run HollerbackApp::WebApp.sprockets
+map SignalApp::WebApp.settings.assets_prefix do
+  run SignalApp::WebApp.sprockets
 end
 
 map '/' do
-  run HollerbackApp::WebApp
+  run SignalApp::WebApp
 end

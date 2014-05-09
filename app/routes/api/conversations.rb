@@ -1,4 +1,4 @@
-module HollerbackApp
+module SignalApp
   class ApiApp < BaseApp
     get '/me/conversations' do
       scope = current_user.memberships
@@ -37,7 +37,7 @@ module HollerbackApp
           "user.created_at" => user.created_at
       }
 
-      inviter = Hollerback::ConversationInviter.new(current_user, invites, usernames, name)
+      inviter = Signal::ConversationInviter.new(current_user, invites, usernames, name)
 
 
       if inviter.invite
@@ -50,11 +50,25 @@ module HollerbackApp
     end
 
     post '/me/conversations/:id/follow' do
-      #TODO: fill in
+      begin
+        membership = Membership.find(params[:id])
+        membership.following = true
+        membership.save
+        success_json(data: nil)
+      rescue ActiveRecord::RecordNotFound
+        not_found
+      end
     end
 
     post '/me/conversations/:id/unfollow' do
-      #TODO: fill in
+      begin
+        membership = Membership.find(params[:id])
+        membership.following = false
+        membership.save
+        success_json(data: nil)
+      rescue ActiveRecord::RecordNotFound
+        not_found
+      end
     end
 
     post '/me/conversations/:id/text' do
@@ -163,10 +177,8 @@ module HollerbackApp
     end
 
     post '/me/conversations/:id/watch_all' do
-      if (@api_version == HollerbackApp::ApiVersion::V1)
-        if (!ensure_params(:message_types))
-          return error_json 400, msg: "missing required parameter: message_types"
-        end
+      if (!ensure_params(:message_types))
+        return error_json 400, msg: "missing required parameter: message_types"
       end
 
       begin

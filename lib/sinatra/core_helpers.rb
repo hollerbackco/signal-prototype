@@ -9,7 +9,7 @@ module Sinatra
 
     def logger
       return @logger if @logger
-      @logger = HollerbackApp::BaseApp.logger
+      @logger = SignalApp::BaseApp.logger
       @logger.formatter = proc do |severity, datetime, progname, msg|
         user_info = (logged_in? ? "#{user.username}:#{user.id}" : "anon_user")
         "[#{datetime}|#{progname}|#{user_info}] #{msg}\n"

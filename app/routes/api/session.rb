@@ -1,5 +1,5 @@
 # session routes
-module HollerbackApp
+module SignalApp
   class ApiApp < BaseApp
     post '/session' do
       logout
@@ -36,7 +36,7 @@ module HollerbackApp
         if user
           user.set_verification_code
           user.save
-          Hollerback::SMS.send_message user.phone_normalized, "Hollerback Code: #{user.verification_code}"
+          Signal::SMS.send_message user.phone_normalized, "Signal Code: #{user.verification_code}"
           {
             user: user.as_json
           }.to_json

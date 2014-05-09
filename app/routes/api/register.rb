@@ -1,5 +1,5 @@
 # register routes
-module HollerbackApp
+module SignalApp
   class ApiApp < BaseApp
     post '/register' do
       unless ensure_params(:email, :password, :username, :phone)
@@ -41,7 +41,7 @@ module HollerbackApp
 
         if user.save
           # send a verification code
-          Hollerback::SMS.send_message user.phone_normalized, "Hollerback Code: #{user.verification_code}"
+          Signal::SMS.send_message user.phone_normalized, "Signal Code: #{user.verification_code}"
 
           {
               user: user.reload.as_json
@@ -62,7 +62,7 @@ module HollerbackApp
       user = User.find_by_phone(params[:phone])
       is_new = (user.blank? || user.new?) ? true : false
 
-      if(params['password'])
+      if (params['password'])
         authenticate(:phone_password_code)
       else
         #TODO: Deprecate this ASAP
@@ -107,24 +107,19 @@ module HollerbackApp
     post '/email/available' do
 
       api_version = request.accept[0].to_s
-      if (api_version == HollerbackApp::ApiVersion::V1)
-        email = params[:email]
-        free = true
+      email = params[:email]
+      free = true
 
-        if email.blank? || !email.match(User::VALID_EMAIL_REGEX)
-          msg = "invalid email"
-          free = false
-        elsif !User.find_by_email(params[:email]).blank?
-          msg = "email taken"
-          free = false
-        end
-
-        return success_json data: {:free => free, :message => msg}
+      if email.blank? || !email.match(User::VALID_EMAIL_REGEX)
+        msg = "invalid email"
+        free = false
+      elsif !User.find_by_email(params[:email]).blank?
+        msg = "email taken"
+        free = false
       end
 
-      free = User.find_by_email(params[:email]).blank?
+      return success_json data: {:free => free, :message => msg}
 
-      return success_json data: free
     end
 
     post '/waitlist' do

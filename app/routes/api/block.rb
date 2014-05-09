@@ -1,4 +1,4 @@
-module HollerbackApp
+module SignalApp
   class ApiApp < BaseApp
     post '/me/users/:id/mute' do
       user = User.find(params[:id])

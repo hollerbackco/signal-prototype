@@ -44,7 +44,7 @@ class Video < ActiveRecord::Base
 
   def url
     return "" if filename.blank?
-    #HollerbackApp::BaseApp.settings.cache.fetch("video-url-#{id}", 1.week) do
+    #SignalApp::BaseApp.settings.cache.fetch("video-url-#{id}", 1.week) do
     #video_object.public_url
     [CLOUDFRONT_URL, video_object.key].join("/")
     #end
@@ -54,7 +54,7 @@ class Video < ActiveRecord::Base
     return "" if filename.blank?
     #return "" unless thumb_object.exists?
 
-    #HollerbackApp::BaseApp.settings.cache.fetch("video-thumb-url-#{id}", 1.week) do
+    #SignalApp::BaseApp.settings.cache.fetch("video-thumb-url-#{id}", 1.week) do
     [CLOUDFRONT_URL, thumb_object.key].join("/")
     #end
   end

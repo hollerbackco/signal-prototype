@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Hollerback::SMS do
+describe Signal::SMS do
   let(:user) do
     User.create(
       email: "tester@test.com",
@@ -12,7 +12,7 @@ describe Hollerback::SMS do
   end
 
   it "sends a message" do
-    Hollerback::SMS.send_message user.phone, "hello"
+    Signal::SMS.send_message user.phone, "hello"
     open_last_text_message_for user.phone
     current_text_message.should have_body "hello"
   end

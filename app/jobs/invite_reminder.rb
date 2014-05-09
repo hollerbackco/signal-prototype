@@ -10,14 +10,14 @@ class InviteReminder
 
 
         unless(invite.conversation.blank?)
-          message = "hi. #{inviter.username} sent you a video message and they're waiting for you to see it on hollerback. you can download it here: http://www.hollerback.co/download"
+          message = "hi. #{inviter.username} sent you a message and they're waiting for you to see it on signal. you can download it here: http://www.hollerback.co/download"
           invite_type = "implicit"
         else
-          message = "hi. #{inviter.username} wants to send you messages on hollerback. they're waiting for you here: http://www.hollerback.co/download"
+          message = "hi. #{inviter.username} wants to send you messages on signal. they're waiting for you here: http://www.hollerback.co/download"
           invite_type = "explicit"
         end
 
-        Hollerback::SMS.send_message(invite.phone, message)
+        Signal::SMS.send_message(invite.phone, message)
 
         unless invite.tracked
 
@@ -26,7 +26,9 @@ class InviteReminder
               already_invited: []
           }
           MetricsPublisher.publish_user_metric(inviter, "users:invite:#{invite_type}", data)
+          invite.tracked = true
         end
+        invite.save
         data = { phone: invite.phone }
         MetricsPublisher.publish_delay("invite:reminder", data)
       end

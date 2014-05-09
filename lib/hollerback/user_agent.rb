@@ -1,4 +1,4 @@
-module Hollerback
+module Signal
   class UserAgent
     module Platform
       Windows       = /windows/i

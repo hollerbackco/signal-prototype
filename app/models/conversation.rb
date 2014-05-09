@@ -52,7 +52,7 @@ class Conversation < ActiveRecord::Base
 
   def self.find_by_phone_numbers(user, invites)
     #todo do this with sql
-    parsed_numbers = Hollerback::ConversationInviter.parse(user,invites)
+    parsed_numbers = Signal::ConversationInviter.parse(user,invites)
     parsed_numbers = parsed_numbers + [user.phone_normalized]
 
     user.member_of.keep_if do |conversation|

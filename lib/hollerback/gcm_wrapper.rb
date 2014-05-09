@@ -1,4 +1,4 @@
-module Hollerback
+module Signal
   class GcmWrapper
 
     module TYPE
@@ -8,7 +8,7 @@ module Hollerback
 
     def self.init
       @@GCMS = GCM.new ENV["GCM_KEY"]
-      HollerbackApp::BaseApp::logger.info "initializing gcm"
+      SignalApp::BaseApp::logger.info "initializing gcm"
     end
 
     def self.send_notification(registration_ids, type, payload = {}, options = {})

@@ -1,4 +1,4 @@
-module HollerbackApp
+module SignalApp
   #this class will hold rules related to client side display
   class ClientDisplayManager
 

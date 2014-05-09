@@ -1,4 +1,4 @@
-module HollerbackApp
+module SignalApp
   class WebApp < BaseApp
     def http_authorized?
       @auth ||= Rack::Auth::Basic::Request.new(request.env)
@@ -161,7 +161,7 @@ module HollerbackApp
     end
 
     get '/madmin/stats' do
-      stats = Hollerback::Statistics.new
+      stats = Signal::Statistics.new
       {
           users_count: stats.users_count,
           conversations_count: stats.conversations_count,

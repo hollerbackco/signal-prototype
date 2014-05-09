@@ -14,7 +14,7 @@ class WelcomeUser
   def send_video_to_user(filename, user)
     return unless will_user
     conversation = user.conversations.create
-    conversation.name = "Will from Hollerback"
+    conversation.name = "Will from Signal"
     conversation.members << will_user
     conversation.save
     membership = Membership.where(conversation_id: conversation.id, user_id: will_user.id).first

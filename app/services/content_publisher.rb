@@ -91,7 +91,7 @@ class ContentPublisher
   private
 
   def notify_recipients(messages)
-    Hollerback::NotifyRecipients.new(messages).run
+    Signal::NotifyRecipients.new(messages).run
   end
 
   def publish_analytics(content, needs_reply, is_reply, last_message_at)
@@ -118,7 +118,7 @@ class ContentPublisher
     phones.each do |phone|
       url = create_video_share_url(content, phone)
       msg = "#{sender.username} sent you a message on hollerback. #{url}"
-      Hollerback::SMS.delay.send_message phone, msg, content.thumb_url
+      Signal::SMS.delay.send_message phone, msg, content.thumb_url
     end
   end
 
@@ -127,7 +127,7 @@ class ContentPublisher
       levels = [5, 10, 25, 50, 100, 250, 500, 1000]
       if level = levels.index(user.videos.count)
         level = level + 1
-        Hollerback::BMO.delay.say("#{user.username} has leveled up: #{level}")
+        Signal::BMO.delay.say("#{user.username} has leveled up: #{level}")
 
         #send push on level up to friends regarding the video count
         #PushOnLevelUp.perform_async(user.id, user.videos.count)

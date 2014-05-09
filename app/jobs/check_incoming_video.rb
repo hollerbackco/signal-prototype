@@ -19,7 +19,7 @@ class CheckIncomingVideo
       p "[incoming video] guid:#{guid} convo_id:#{convo_id} has not been processed"
       #notify user
       if(!dry_run)
-        Hollerback::Push.send(nil, payload["sender_id"], {:alert => "Message send failed. Please retry.", :sound => "default"}.to_json)
+        Signal::Push.send(nil, payload["sender_id"], {:alert => "Message send failed. Please retry.", :sound => "default"}.to_json)
       else
         p "dry run push on incoming"
       end

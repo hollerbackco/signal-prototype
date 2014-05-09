@@ -1,6 +1,6 @@
 class EmailInactive
   def self.run(dryrun=false)
-    counter = 0 
+    counter = 0
     User.find_each do |user|
       emailer = self.new(user: user, dryrun: dryrun)
       if emailer.remind
@@ -37,10 +37,10 @@ class EmailInactive
     Mail.deliver do
       to receiver.email
       from 'no-reply@hollerback.co'
-      subject "#{from_username} sent you a message on Hollerback"
+      subject "#{from_username} sent you a message on Signal"
 
       html_part do
-        body "<p>Hey there,</p><p>You have #{message_count} new message#{message_count > 1 ? "s" : ""} on Hollerback from #{from_username}.</p><p><a href='http://www.hollerback.co/app'>View message</a></p>"
+        body "<p>Hey there,</p><p>You have #{message_count} new message#{message_count > 1 ? "s" : ""} on Signal from #{from_username}.</p><p><a href='http://www.hollerback.co/app'>View message</a></p>"
       end
     end
   end

@@ -36,7 +36,7 @@ class RemindInactive
     p user.username, message
     return false if dryrun
     p "doing the real thing"
-    Hollerback::Push.send(nil,user.id, {
+    Signal::Push.send(nil,user.id, {
       alert: message,
       sound: "default"
     }.to_json)

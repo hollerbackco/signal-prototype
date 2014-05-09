@@ -44,7 +44,7 @@ class TextPublisher
       Message.create(obj)
     end
 
-    Hollerback::NotifyRecipients.new(messages.compact).run
+    Signal::NotifyRecipients.new(messages.compact).run
 
     MetricsPublisher.publish(@sender, "text:create")
 

@@ -21,7 +21,7 @@ class ConversationTtyl
       channel = "user/#{m.user_id}/sync"
       data = [m.to_sync].as_json
 
-      Hollerback::MQTT.delay.publish(channel, data)
+      Signal::MQTT.delay.publish(channel, data)
     end
   end
 
@@ -30,7 +30,7 @@ class ConversationTtyl
     text = "#{sender_name}: ttyl"
 
     badge_count = person.unseen_memberships_count
-    Hollerback::Push.delay.send(person.id, {
+    Signal::Push.delay.send(person.id, {
       alert: text,
       badge_count: badge_count,
       sound: "default",
@@ -40,7 +40,7 @@ class ConversationTtyl
 
     data = [sender_membership.to_sync]
     person.devices.android.each do |device|
-      Hollerback::GcmWrapper.send_notification([device.token], Hollerback::GcmWrapper::TYPE::SYNC, data)
+      Signal::GcmWrapper.send_notification([device.token], Signal::GcmWrapper::TYPE::SYNC, data)
     end
   end
 end

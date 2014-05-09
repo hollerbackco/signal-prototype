@@ -251,7 +251,7 @@ class Reactivator
         user = user_info[:user]
         message = user_info[:message]
 
-        Hollerback::Push.send(nil,user.id, {
+        Signal::Push.send(nil,user.id, {
             alert: message,
             sound: "default"
         }.to_json)
@@ -259,7 +259,7 @@ class Reactivator
         tokens =  user.devices.android.map {|device| device.token}
         payload = {:message => message}
         if(!tokens.empty?)
-          Hollerback::GcmWrapper.send_notification(tokens, Hollerback::GcmWrapper::TYPE::NOTIFICATION, payload)
+          Signal::GcmWrapper.send_notification(tokens, Signal::GcmWrapper::TYPE::NOTIFICATION, payload)
         end
 
         data = {

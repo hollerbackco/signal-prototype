@@ -8,7 +8,7 @@ namespace :email do
       Mail.deliver do
         to waitlister.email
         from 'no-reply@hollerback.co'
-        subject "Hollerback is now live in the AppStore"
+        subject "Signal is now live in the AppStore"
 
         #body
 

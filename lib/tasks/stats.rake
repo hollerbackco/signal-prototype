@@ -47,6 +47,6 @@ namespace :stats do
   end
 
   def stats
-    @stats ||= Hollerback::Statistics.new
+    @stats ||= Signal::Statistics.new
   end
 end

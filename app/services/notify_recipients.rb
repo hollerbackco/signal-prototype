@@ -1,4 +1,4 @@
-module Hollerback
+module Signal
   class NotifyRecipients
     attr_accessor :messages
 
@@ -9,10 +9,10 @@ module Hollerback
     def run
       messages.each do |message|
         recipient = message.membership.user
-        unless message.sender?
+        unless message.sender? || !message.membership.following?
           notify_push message, recipient
         end
-        notify_mqtt message, recipient
+        #notify_mqtt message, recipient
       end
     end
 
@@ -20,7 +20,7 @@ module Hollerback
 
     def notify_mqtt(message, person)
       channel = "user/#{person.id}/sync"
-      Hollerback::MQTT.delay.publish(channel, {})
+      Signal::MQTT.delay.publish(channel, {})
     end
 
     def notify_push(message, person)
@@ -38,7 +38,7 @@ module Hollerback
 
       #end
 
-      Hollerback::Push.delay.send(person.id, {  #are we sending it to apple anyways?
+      Signal::Push.delay.send(person.id, {  #are we sending it to apple anyways?
         alert: alert_msg,
         badge: badge_count,
         sound: "default",
@@ -49,8 +49,8 @@ module Hollerback
       if(message.message_type == Message::Type::TEXT)
         alert_msg = "#{message.sender_name}: #{message.content["text"]}"
         person.devices.android.each do |device|
-          res = Hollerback::GcmWrapper.send_notification([device.token],                     #tokens
-                                                         Hollerback::GcmWrapper::TYPE::NOTIFICATION, #type
+          res = Signal::GcmWrapper.send_notification([device.token],                     #tokens
+                                                         Signal::GcmWrapper::TYPE::NOTIFICATION, #type
                                                          {:message => alert_msg},                                #payload
                                                          collapse_key: "new_message")        #options
 
@@ -58,8 +58,8 @@ module Hollerback
         end
       else
         person.devices.android.each do |device|
-          res = Hollerback::GcmWrapper.send_notification([device.token],                     #tokens
-                                                         Hollerback::GcmWrapper::TYPE::SYNC, #type
+          res = Signal::GcmWrapper.send_notification([device.token],                     #tokens
+                                                         Signal::GcmWrapper::TYPE::SYNC, #type
                                                          nil,                                #payload
                                                          collapse_key: "new_message")        #options
 

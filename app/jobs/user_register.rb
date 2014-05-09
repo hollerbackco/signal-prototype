@@ -27,7 +27,7 @@ class UserRegister
       Honeybadger.notify(e, {:error_message => "notify friend join failed"})
     end
 
-    Hollerback::BMO.say("#{user.username} just signed up")
+    Signal::BMO.say("#{user.username} just signed up")
 
   end
 
@@ -64,7 +64,7 @@ class UserRegister
 
       end
     rescue Exception => ex
-      HollerbackApp::BaseApp::logger.error "there was a problem extracting the cohort from the invites"
+      SignalApp::BaseApp::logger.error "there was a problem extracting the cohort from the invites"
       Honeybadger.notify(ex)
     end
 
@@ -83,7 +83,7 @@ class UserRegister
     friends.each do |friend|
       msg = "#{friend.name} just joined"
       MetricsPublisher.publish(friend.user, "friends:join")
-      Hollerback::Push.delay.send(friend.user.id, {
+      Signal::Push.delay.send(friend.user.id, {
           alert: msg,
           sound: "default",
           content_available: true,
@@ -93,16 +93,16 @@ class UserRegister
       tokens =  friend.user.devices.android.map {|device| device.token}
       payload = {:message => msg}
       if(!tokens.empty?)
-        Hollerback::GcmWrapper.send_notification(tokens, Hollerback::GcmWrapper::TYPE::NOTIFICATION, payload)
+        Signal::GcmWrapper.send_notification(tokens, Signal::GcmWrapper::TYPE::NOTIFICATION, payload)
       end
 
       # Mail.deliver do
       #   to friend.user.email
       #   from 'no-reply@hollerback.co'
-      #   subject "#{friend.name} just joined Hollerback"
+      #   subject "#{friend.name} just joined Signal"
       #
       #   text_part do
-      #     body "Just wanted to let you know that #{friend.name} just joined Hollerback! Send them a message."
+      #     body "Just wanted to let you know that #{friend.name} just joined Signal! Send them a message."
       #   end
       # end
 

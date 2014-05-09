@@ -1,13 +1,13 @@
 db_namespace = namespace :db do
   desc 'Create the database defined in config/database.yml for the current APP_ENV'
   task :create do
-    Hollerback::Tasks::DatabaseTasks.create_database
+    Signal::Tasks::DatabaseTasks.create_database
   end
 
   desc 'Drops the database for the current APP_ENV'
   task :drop do
     begin
-      Hollerback::Tasks::DatabaseTasks.drop_database
+      Signal::Tasks::DatabaseTasks.drop_database
     rescue Exception => e
       puts "Couldn't drop database : #{e.inspect}"
     end
@@ -31,7 +31,7 @@ db_namespace = namespace :db do
     desc 'Create a db/schema.rb file that is portable against any DB supported by AR'
     task :dump do
       require 'active_record/schema_dumper'
-      filename = ENV['SCHEMA'] || File.join("#{HollerbackApp::BaseApp.app_root}/db", 'schema.rb')
+      filename = ENV['SCHEMA'] || File.join("#{SignalApp::BaseApp.app_root}/db", 'schema.rb')
       File.open(filename, "w:utf-8") do |file|
         ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, file)
       end
@@ -40,7 +40,7 @@ db_namespace = namespace :db do
   end
 end
 
-module Hollerback
+module Signal
   module Tasks
     module DatabaseTasks
       extend self

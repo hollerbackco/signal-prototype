@@ -1,7 +1,7 @@
-module HollerbackApp
+module SignalApp
   class ApiApp < BaseApp
     get '/contacts' do
-      contact_book = Hollerback::ContactBook.new(current_user)
+      contact_book = Signal::ContactBook.new(current_user)
       contacts = contact_book.contacts_on_hollerback
 
       success_json data: contacts.as_json
@@ -13,7 +13,7 @@ module HollerbackApp
                    if numbers.is_a? String
                      numbers = numbers.split(",")
                    end
-                   contacts = Hollerback::ContactChecker.new.find_by_phone(numbers)
+                   contacts = Signal::ContactChecker.new.find_by_phone(numbers)
                  else
                    unless ensure_params(:c)
                      return error_json 400, msg: "missing required params"
@@ -29,12 +29,12 @@ module HollerbackApp
                      hashed_numbers = prepare_only_hashed_numbers(params["c"])
 
                      #UpdateContactBook.perform_async(current_user.id, contacts)
-                     contact_book = Hollerback::ContactBook.new(current_user)
+                     contact_book = Signal::ContactBook.new(current_user)
                      contact_book.update(contacts)
                      contacts = contact_book.contacts_on_hollerback
                    else
                      hashed_numbers = prepare_only_hashed_numbers(params["c"])
-                     contacts = Hollerback::ContactChecker.new.find_by_hashed_phone(hashed_numbers)
+                     contacts = Signal::ContactChecker.new.find_by_hashed_phone(hashed_numbers)
                    end
 
                    contacts

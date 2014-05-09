@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Hollerback::ContactBook do
+describe Signal::ContactBook do
   before(:all) do
     @user ||= FactoryGirl.create(:user)
     @second_user ||= FactoryGirl.create(:user)
-    @book ||= Hollerback::ContactBook.new(@user)
+    @book ||= Signal::ContactBook.new(@user)
   end
 
   let(:user) { @user }

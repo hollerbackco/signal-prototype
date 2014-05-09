@@ -1,47 +1,47 @@
-module Hollerback
+module Signal
   class Statistics
     def initialize
     end
 
     def conversations_count
-      HollerbackApp::BaseApp.settings.cache.fetch "stat-conversations-count" do
+      SignalApp::BaseApp.settings.cache.fetch "stat-conversations-count" do
         Conversation.count
       end
     end
 
     def users_count
-      HollerbackApp::BaseApp.settings.cache.fetch "stat-users-count" do
+      SignalApp::BaseApp.settings.cache.fetch "stat-users-count" do
         User.count
       end
     end
 
     def videos_sent_count
-      HollerbackApp::BaseApp.settings.cache.fetch "stat-videos-sent" do
+      SignalApp::BaseApp.settings.cache.fetch "stat-videos-sent" do
         Video.count
       end
     end
 
     def videos_received_count
-      HollerbackApp::BaseApp.settings.cache.fetch "stat-videos-received" do
+      SignalApp::BaseApp.settings.cache.fetch "stat-videos-received" do
         Message.received.watchable.count
       end
     end
 
     def videos_unread_count
-      HollerbackApp::BaseApp.settings.cache.fetch "stat-videos-unread" do
+      SignalApp::BaseApp.settings.cache.fetch "stat-videos-unread" do
         Message.unseen.received.count
         #User.all.map{ |u| u.unread_videos.count }.sum
       end
     end
 
     def memberships_count
-      HollerbackApp::BaseApp.settings.cache.fetch "stat-memberships-sent" do
+      SignalApp::BaseApp.settings.cache.fetch "stat-memberships-sent" do
         Membership.count
       end
     end
 
     def members_in_conversations_avg
-      HollerbackApp::BaseApp.settings.cache.fetch "stat-avg-members-per-convo-count" do
+      SignalApp::BaseApp.settings.cache.fetch "stat-avg-members-per-convo-count" do
         if conversations_count > 0
           memberships_count.to_f / conversations_count.to_f
         else
@@ -51,7 +51,7 @@ module Hollerback
     end
 
     def videos_in_conversations_avg
-      HollerbackApp::BaseApp.settings.cache.fetch "stat-avg-videos-per-convo-count" do
+      SignalApp::BaseApp.settings.cache.fetch "stat-avg-videos-per-convo-count" do
         if conversations_count > 0
           videos_sent_count.to_f / conversations_count.to_f
         else
@@ -65,14 +65,14 @@ module Hollerback
     end
 
     def uncache_all
-      HollerbackApp::BaseApp.settings.cache.delete "stat-conversations-count"
-      HollerbackApp::BaseApp.settings.cache.delete "stat-users-count"
-      HollerbackApp::BaseApp.settings.cache.delete "stat-videos-sent"
-      HollerbackApp::BaseApp.settings.cache.delete "stat-videos-unread"
-      HollerbackApp::BaseApp.settings.cache.delete "stat-memberships-sent"
-      HollerbackApp::BaseApp.settings.cache.delete "stat-avg-members-per-convo-count"
-      HollerbackApp::BaseApp.settings.cache.delete "stat-avg-videos-per-convo-count"
-      HollerbackApp::BaseApp.settings.cache.delete "stat-videos-received-count"
+      SignalApp::BaseApp.settings.cache.delete "stat-conversations-count"
+      SignalApp::BaseApp.settings.cache.delete "stat-users-count"
+      SignalApp::BaseApp.settings.cache.delete "stat-videos-sent"
+      SignalApp::BaseApp.settings.cache.delete "stat-videos-unread"
+      SignalApp::BaseApp.settings.cache.delete "stat-memberships-sent"
+      SignalApp::BaseApp.settings.cache.delete "stat-avg-members-per-convo-count"
+      SignalApp::BaseApp.settings.cache.delete "stat-avg-videos-per-convo-count"
+      SignalApp::BaseApp.settings.cache.delete "stat-videos-received-count"
     end
 
     private

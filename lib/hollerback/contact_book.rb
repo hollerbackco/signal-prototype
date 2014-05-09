@@ -1,4 +1,4 @@
-module Hollerback
+module Signal
   class ContactBook
     attr_accessor :user, :contacts, :contact_ids
 

@@ -2,7 +2,7 @@ require 'will_paginate'
 require 'will_paginate/active_record'
 require 'sinatra/multi_route'
 
-module HollerbackApp
+module SignalApp
   class BaseApp < ::Sinatra::Base
 
     register ::Sinatra::ActiveRecordExtension
@@ -58,10 +58,10 @@ module HollerbackApp
   end
 end
 
-HollerbackApp::BaseApp.load_lib
-HollerbackApp::BaseApp.helpers ::Sinatra::Warden::Helpers
-HollerbackApp::BaseApp.helpers ::Sinatra::CoreHelpers
-HollerbackApp::BaseApp.helpers WillPaginate::Sinatra::Helpers
-HollerbackApp::BaseApp.register Sinatra::MultiRoute
-#HollerbackApp::BaseApp.register ::Sinatra::ActiveRecordExtension
-HollerbackApp::BaseApp.load_config
+SignalApp::BaseApp.load_lib
+SignalApp::BaseApp.helpers ::Sinatra::Warden::Helpers
+SignalApp::BaseApp.helpers ::Sinatra::CoreHelpers
+SignalApp::BaseApp.helpers WillPaginate::Sinatra::Helpers
+SignalApp::BaseApp.register Sinatra::MultiRoute
+#SignalApp::BaseApp.register ::Sinatra::ActiveRecordExtension
+SignalApp::BaseApp.load_config

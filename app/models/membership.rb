@@ -52,11 +52,8 @@ class Membership < ActiveRecord::Base
     end
 
     join_clause = ""
-    if (api_version == HollerbackApp::ApiVersion::V1)
-      join_clause = "LEFT OUTER JOIN messages ON memberships.id = messages.membership_id AND messages.seen_at is null AND CAST(messages.content->'guid' as text) is not null"
-    else
-      join_clause = "LEFT OUTER JOIN messages ON memberships.id = messages.membership_id AND messages.seen_at is null AND CAST(messages.content->'guid' as text) is not null and messages.message_type not like 'text'"
-    end
+    join_clause = "LEFT OUTER JOIN messages ON memberships.id = messages.membership_id AND messages.seen_at is null AND CAST(messages.content->'guid' as text) is not null"
+
 
 
     collection = collection
@@ -125,6 +122,10 @@ class Membership < ActiveRecord::Base
           is_blocked: user.muted?(other)
       }
     end
+  end
+
+  def following?
+    following
   end
 
   # todo: cache this

@@ -1,4 +1,4 @@
-module HollerbackApp
+module SignalApp
   class ApiApp < BaseApp
 
     attr_accessor :app_version, :api_version
@@ -37,7 +37,7 @@ module HollerbackApp
 
       if app_version and app_version != current_user.last_app_version
         current_user.last_app_version = app_version
-        Hollerback::BMO.say("#{current_user.username} updated to #{app_version}")
+        Signal::BMO.say("#{current_user.username} updated to #{app_version}")
       end
 
       current_user.save
@@ -69,7 +69,7 @@ module HollerbackApp
 
     get '/' do
       logger.info "hello"
-      success_json data: "Hollerback App Api v1"
+      success_json data: "Signal App Api v1"
     end
 
     get '/app/update' do

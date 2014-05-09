@@ -1,9 +1,9 @@
-module HollerbackApp
+module SignalApp
   class WebApp < BaseApp
     get '/' do
       #haml :index, layout: false
-      user_agent = Hollerback::UserAgent.new(request.user_agent)
-      
+      user_agent = Signal::UserAgent.new(request.user_agent)
+
       if user_agent.android?
         return redirect '/beta'
       end
@@ -115,7 +115,7 @@ module HollerbackApp
 
       if phone
         body = "Download hollerback: http://appstore.com/hollerback"
-        Hollerback::SMS.send_message(phone, body)
+        Signal::SMS.send_message(phone, body)
         {
           :success => true,
           :msg => "Thanks, check the message on your phone"

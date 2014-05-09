@@ -19,7 +19,7 @@ class Device < ActiveRecord::Base
 
   def set_access_token
     self.access_token = loop do
-      access_token = ::Hollerback::Random.friendly_token(40)
+      access_token = ::Signal::Random.friendly_token(40)
       break access_token unless Device.find_by_access_token(access_token)
     end
   end

@@ -11,19 +11,19 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>http://hollerback.co/dist/HollerbackApp.ipa</string>
+					<string>http://hollerback.co/dist/SignalApp.ipa</string>
 				</dict>
 			</array>
 			<key>metadata</key>
 			<dict>
 				<key>bundle-identifier</key>
-				<string>com.gethollerback.HollerbackApp</string>
+				<string>com.gethollerback.SignalApp</string>
 				<key>bundle-version</key>
 				<string>0.9.1</string>
 				<key>kind</key>
 				<string>software</string>
 				<key>title</key>
-				<string>Hollerback</string>
+				<string>Signal</string>
 			</dict>
 		</dict>
 	</array>

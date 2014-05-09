@@ -1,4 +1,4 @@
-module HollerbackApp
+module SignalApp
   ANDROID = "android"
   IOS = "ios"
   OTHER = "other"

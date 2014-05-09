@@ -1,4 +1,4 @@
-module Hollerback
+module Signal
   class ElasticTranscoderRequest
     PIPELINE_ID  = "1369278513259-ejysz1"
     PRESET_BEST  = "1369345552712-nuthg1"

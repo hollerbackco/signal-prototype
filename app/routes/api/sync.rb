@@ -1,4 +1,4 @@
-module HollerbackApp
+module SignalApp
   class ApiApp < BaseApp
     get '/me/sync' do
       last_sync_at = Time.now
@@ -6,8 +6,8 @@ module HollerbackApp
       before_last_message_at = Time.parse(params[:before_last_message_at]) if params[:before_last_message_at]
 
 
-      user_agent = Hollerback::UserAgent.new(request.user_agent)
-      count = params[:count] #HollerbackApp::IOS_MAX_SYNC_OBJECTS if user_agent.ios? && @app_version &&  GEM::RUBY_VERSION.new(@app_version) >  GEM::RUBY_VERSION.new('1.1.5')
+      user_agent = Signal::UserAgent.new(request.user_agent)
+      count = params[:count] #SignalApp::IOS_MAX_SYNC_OBJECTS if user_agent.ios? && @app_version &&  GEM::RUBY_VERSION.new(@app_version) >  GEM::RUBY_VERSION.new('1.1.5')
 
       sync_objects = []
 

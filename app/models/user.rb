@@ -1,6 +1,6 @@
 require 'digest/md5'
 class User < ActiveRecord::Base
-  include Hollerback::SecurePassword
+  include Signal::SecurePassword
 
   # array of blocked users
   serialize :muted, Array
@@ -138,11 +138,11 @@ class User < ActiveRecord::Base
   end
 
   def memcache_key_touch
-    HollerbackApp::BaseApp.settings.cache.set("user/#{id}/memcache-id", self.memcache_id + 1)
+    SignalApp::BaseApp.settings.cache.set("user/#{id}/memcache-id", self.memcache_id + 1)
   end
 
   def memcache_id
-    HollerbackApp::BaseApp.settings.cache.fetch("user/#{id}/memcache-id") do
+    SignalApp::BaseApp.settings.cache.fetch("user/#{id}/memcache-id") do
       rand(10)
     end
   end
@@ -303,7 +303,7 @@ class User < ActiveRecord::Base
 
   def set_access_token
     self.access_token = loop do
-      access_token = ::Hollerback::Random.friendly_token(40)
+      access_token = ::Signal::Random.friendly_token(40)
       break access_token unless User.find_by_access_token(access_token)
     end
   end

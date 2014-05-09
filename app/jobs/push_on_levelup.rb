@@ -10,7 +10,7 @@ class PushOnLevelUp
       friends.each do |friend|
         msg = "#{friend.name} sent #{message_count} videos to friends and family"
 
-        Hollerback::Push.delay.send(friend.user.id, {
+        Signal::Push.delay.send(friend.user.id, {
                                                   alert: msg,
                                                   sound: "default",
                                                   content_available: false,
@@ -20,7 +20,7 @@ class PushOnLevelUp
         tokens =  friend.user.devices.android.map {|device| device.token}
         payload = {:message => msg}
         if(!tokens.empty?)
-          Hollerback::GcmWrapper.send_notification(tokens, Hollerback::GcmWrapper::TYPE::NOTIFICATION, payload)
+          Signal::GcmWrapper.send_notification(tokens, Signal::GcmWrapper::TYPE::NOTIFICATION, payload)
         end
       end
 

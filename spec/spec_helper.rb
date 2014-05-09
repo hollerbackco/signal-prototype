@@ -13,7 +13,7 @@ require 'sidekiq/testing'
 require 'factory_girl'
 require 'ffaker'
 
-module HollerbackApp
+module SignalApp
   class BaseApp < ::Sinatra::Base
     set :environment, :test
     set :run, false
@@ -22,7 +22,7 @@ module HollerbackApp
   end
 end
 
-module Hollerback
+module Signal
   module Test
     module Support
       def app
@@ -30,7 +30,7 @@ module Hollerback
           Warden::Manager.serialize_into_session { |user| user.id }
           Warden::Manager.serialize_from_session { |id| User.find(id) }
 
-          run HollerbackApp::ApiApp
+          run SignalApp::ApiApp
         end
       end
     end
@@ -42,7 +42,7 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.include SmsSpec::Helpers
   config.include SmsSpec::Matchers
-  config.include Hollerback::Test::Support
+  config.include Signal::Test::Support
 
   config.before(:all) do
     DatabaseCleaner.clean!

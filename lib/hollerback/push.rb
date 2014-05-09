@@ -1,4 +1,4 @@
-module Hollerback
+module Signal
   class Push
     class << self
       def configure(pemfile, is_production=false, app_root)

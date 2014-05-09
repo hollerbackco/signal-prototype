@@ -1,0 +1,104 @@
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Starting the New Relic agent in "local" environment.
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "local" section of your newrelic.yml.
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Reading configuration from config/newrelic.yml
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] ERROR : Config (config/newrelic.yml) doesn't include a 'local' environment!
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Enabling the Request Sampler.
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Environment: local
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : No known dispatcher detected.
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Application: local
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] WARN : No license key found in newrelic.yml config. This often means your newrelic.yml is missing a section for the running environment 'local'
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Installing ActiveRecord instrumentation
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Installing Dalli Memcache instrumentation
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Installing Net instrumentation
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Installing Sinatra instrumentation
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Installing deferred Rack instrumentation
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Installing Sidekiq instrumentation
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Installing Unicorn instrumentation
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Detected Unicorn, please see additional documentation: https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data
+[05/09/14 14:54:02 -0400 Sajjads-MacBook-Pro.local (87689)] INFO : Finished instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Starting the New Relic agent in "local" environment.
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "local" section of your newrelic.yml.
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Reading configuration from config/newrelic.yml
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] ERROR : Config (config/newrelic.yml) doesn't include a 'local' environment!
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Enabling the Request Sampler.
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Environment: local
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Dispatcher: sidekiq
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Application: local
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] WARN : No license key found in newrelic.yml config. This often means your newrelic.yml is missing a section for the running environment 'local'
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Starting the New Relic agent in "local" environment.
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "local" section of your newrelic.yml.
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Reading configuration from config/newrelic.yml
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] ERROR : Config (config/newrelic.yml) doesn't include a 'local' environment!
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Enabling the Request Sampler.
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Environment: local
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Dispatcher: unicorn
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Application: local
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] WARN : No license key found in newrelic.yml config. This often means your newrelic.yml is missing a section for the running environment 'local'
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Installing ActiveRecord instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Installing ActiveRecord instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Installing Dalli Memcache instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Installing Net instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Installing Dalli Memcache instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Installing Net instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Installing Sinatra instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Installing Sinatra instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Installing deferred Rack instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Installing deferred Rack instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Installing Sidekiq instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Installing Unicorn instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Detected Unicorn, please see additional documentation: https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Finished instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Installing Sidekiq instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Installing Unicorn instrumentation
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Detected Unicorn, please see additional documentation: https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data
+[05/09/14 17:10:35 -0400 Sajjads-MacBook-Pro.local (89920)] INFO : Finished instrumentation
+[05/09/14 17:10:40 -0400 Sajjads-MacBook-Pro.local (89919)] INFO : Doing deferred dependency-detection before Rack startup
+[05/09/14 17:10:40 -0400 Sajjads-MacBook-Pro.local (89933)] ERROR : Invalid license key, please contact support@newrelic.com
+[05/09/14 17:10:40 -0400 Sajjads-MacBook-Pro.local (89933)] ERROR : Visit NewRelic.com to obtain a valid license key, or to upgrade your account.
+[05/09/14 17:10:40 -0400 Sajjads-MacBook-Pro.local (89932)] ERROR : Invalid license key, please contact support@newrelic.com
+[05/09/14 17:10:40 -0400 Sajjads-MacBook-Pro.local (89934)] ERROR : Invalid license key, please contact support@newrelic.com
+[05/09/14 17:10:40 -0400 Sajjads-MacBook-Pro.local (89932)] ERROR : Visit NewRelic.com to obtain a valid license key, or to upgrade your account.
+[05/09/14 17:10:40 -0400 Sajjads-MacBook-Pro.local (89934)] ERROR : Visit NewRelic.com to obtain a valid license key, or to upgrade your account.
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Starting the New Relic agent in "local" environment.
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "local" section of your newrelic.yml.
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Reading configuration from config/newrelic.yml
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] ERROR : Config (config/newrelic.yml) doesn't include a 'local' environment!
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Enabling the Request Sampler.
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Environment: local
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Dispatcher: sidekiq
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Application: local
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] WARN : No license key found in newrelic.yml config. This often means your newrelic.yml is missing a section for the running environment 'local'
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Installing ActiveRecord instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Installing Dalli Memcache instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Installing Net instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Installing Sinatra instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Starting the New Relic agent in "local" environment.
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "local" section of your newrelic.yml.
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Reading configuration from config/newrelic.yml
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] ERROR : Config (config/newrelic.yml) doesn't include a 'local' environment!
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Installing deferred Rack instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Enabling the Request Sampler.
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Environment: local
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Dispatcher: unicorn
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Application: local
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] WARN : No license key found in newrelic.yml config. This often means your newrelic.yml is missing a section for the running environment 'local'
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Installing Sidekiq instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Installing Unicorn instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Detected Unicorn, please see additional documentation: https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89951)] INFO : Finished instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Installing ActiveRecord instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Installing Dalli Memcache instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Installing Net instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Installing Sinatra instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Installing deferred Rack instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Installing Sidekiq instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Installing Unicorn instrumentation
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Detected Unicorn, please see additional documentation: https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data
+[05/09/14 17:11:26 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Finished instrumentation
+[05/09/14 17:11:30 -0400 Sajjads-MacBook-Pro.local (89950)] INFO : Doing deferred dependency-detection before Rack startup
+[05/09/14 17:11:31 -0400 Sajjads-MacBook-Pro.local (89965)] ERROR : Invalid license key, please contact support@newrelic.com
+[05/09/14 17:11:31 -0400 Sajjads-MacBook-Pro.local (89965)] ERROR : Visit NewRelic.com to obtain a valid license key, or to upgrade your account.
+[05/09/14 17:11:31 -0400 Sajjads-MacBook-Pro.local (89966)] ERROR : Invalid license key, please contact support@newrelic.com
+[05/09/14 17:11:31 -0400 Sajjads-MacBook-Pro.local (89966)] ERROR : Visit NewRelic.com to obtain a valid license key, or to upgrade your account.
+[05/09/14 17:11:31 -0400 Sajjads-MacBook-Pro.local (89964)] ERROR : Invalid license key, please contact support@newrelic.com
+[05/09/14 17:11:31 -0400 Sajjads-MacBook-Pro.local (89964)] ERROR : Visit NewRelic.com to obtain a valid license key, or to upgrade your account.

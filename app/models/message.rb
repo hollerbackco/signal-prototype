@@ -29,7 +29,7 @@ class Message < ActiveRecord::Base
     m = record.membership
     m.deleted_at = nil
     m.last_message_at = record.sent_at || record.created_at
-    if (!record.sender? or m.most_recent_thumb_url.blank?) &&  (record.message_type != Type::TEXT)
+    if (!record.sender? or m.most_recent_thumb_url.blank?) && (record.message_type != Type::TEXT)
       if !record.ttyl?
         m.most_recent_thumb_url = record.thumb_url
       end
@@ -62,11 +62,7 @@ class Message < ActiveRecord::Base
 
     collection = []
 
-    unless api_version == HollerbackApp::ApiVersion::V1
-      collection = options[:user].messages.watchable.where("message_type not like ?", Type::TEXT)
-    else
-      collection = options[:user].messages.watchable
-    end
+    collection = options[:user].messages.watchable
 
     collection = if options[:since]
                    collection.updated_since_within_memberships(options[:since], options[:membership_ids])
@@ -80,12 +76,7 @@ class Message < ActiveRecord::Base
     rescue Exception => e
       logger.error e
     end
-    logger.info ("constant: #{HollerbackApp::ApiVersion::V1} api version: #{api_version} #{api_version == HollerbackApp::ApiVersion::V1}")
-    unless api_version == HollerbackApp::ApiVersion::V1
-      collection.map(&:to_sync)
-    else
-      collection.map(&:to_sync_v1)
-    end
+    collection.map(&:to_sync_v1)
   end
 
   #Deprecated
@@ -96,23 +87,18 @@ class Message < ActiveRecord::Base
     }
   end
 
-  def as_json(opts={}, api_version=nil)
+  def as_json(opts={})
     options = {}
-    unless api_version == HollerbackApp::ApiVersion::V1
-      options = options.merge({ :methods => [:guid, :url, :thumb_url, :gif_url, :conversation_id, :sender_id, :user, :is_deleted, :subtitle, :display] })
+    if (message_type == Type::TEXT)
+      payload = :text
     else
-      payload = ""
-      if(message_type == Type::TEXT)
-        payload = :text
-      else
-        payload = :video
-      end
-      options = options.merge({ :methods => [:type, :conversation_id, :sender_id, :user, :is_deleted, payload]})
+      payload = :video
     end
+    options = options.merge({:methods => [:type, :conversation_id, :sender_id, :user, :is_deleted, payload]})
     #options = options.merge(:methods => [:guid, :url, :thumb_url, :gif_url, :conversation_id, :user, :is_deleted, :subtitle, :display])
     options = options.merge(opts)
     options = options.merge(:only => [:created_at, :sender_name, :sent_at, :needs_reply])
-    super(options).merge( api_version != HollerbackApp::ApiVersion::V1 ? {isRead: !unseen?, id: guid} : {is_read: !unseen?})
+    super(options).merge({is_read: !unseen?})
   end
 
   #after text support
@@ -120,7 +106,7 @@ class Message < ActiveRecord::Base
 
     {
         type: "message",
-        sync: as_json({}, HollerbackApp::ApiVersion::V1)
+        sync: as_json()
     }
   end
 
@@ -215,11 +201,11 @@ class Message < ActiveRecord::Base
   def self.set_message_display_info(messages, api_version)
 
     rules = {}
-    if (api_version == HollerbackApp::ApiVersion::V1)
+    if (api_version == SignalApp::ApiVersion::V1)
       return
-      #rules = HollerbackApp::ClientDisplayManager.get_rules_by_name('content_cell_display_rules')
+      #rules = SignalApp::ClientDisplayManager.get_rules_by_name('content_cell_display_rules')
     else
-      rules = HollerbackApp::ClientDisplayManager.get_rules_by_name('video_cell_display_rules')
+      rules = SignalApp::ClientDisplayManager.get_rules_by_name('video_cell_display_rules')
     end
 
     #user display info

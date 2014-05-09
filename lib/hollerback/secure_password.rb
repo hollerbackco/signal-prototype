@@ -1,4 +1,4 @@
-module Hollerback
+module Signal
   module SecurePassword
     require 'bcrypt'
 

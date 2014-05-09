@@ -34,7 +34,7 @@ class RemindInvite
   def send_sms(phone, message)
     p message, invite.created_at, invite.id
     return false if dryrun
-    Hollerback::SMS.send_message phone, message
+    Signal::SMS.send_message phone, message
     true
   end
 

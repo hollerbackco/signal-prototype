@@ -1,7 +1,7 @@
 require 'twilio-ruby'
 require 'phone'
 
-module Hollerback
+module Signal
   class SMS
     PHONES = ["+14152758229","+14155285018","+14152300935"]
 

@@ -25,7 +25,7 @@ class TrackInvites
     MetricsPublisher.publish(user, "users:invite:implicit", data)
 
     if(actual_invites.any?)
-      Hollerback::BMO.say("#{user.username} invited #{actual_invites.count} people through a conversation")
+      Signal::BMO.say("#{user.username} invited #{actual_invites.count} people through a conversation")
     end
 
   end
