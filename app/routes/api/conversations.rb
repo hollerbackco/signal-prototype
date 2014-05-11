@@ -108,7 +108,7 @@ module SignalApp
         end
 
         success_json({
-                         data: messages.map { |m| m.as_json({}, @api_version) },
+                         data: messages.map { |m| m.as_json({}) },
                          meta: {
                              last_page: last_page
                          }
