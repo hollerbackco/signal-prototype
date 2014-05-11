@@ -16,8 +16,8 @@ module SignalApp
     # params
     #   invites: array of phone numbers
     post '/me/conversations' do
-      if !ensure_params(:invites) and !ensure_params(:username)
-        return error_json 400, msg: "missing invites or username"
+      if !ensure_params(:invites) and !ensure_params(:username) and !ensure_params(:name)
+        return error_json 400, msg: "missing invites, username, or name"
       end
 
       invites = params["invites"]
