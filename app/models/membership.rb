@@ -2,6 +2,7 @@
 # memberships is a subsciption to a topic
 # memberships can also publish to that topic
 class Membership < ActiveRecord::Base
+  attr_accessible :following
   belongs_to :user
   belongs_to :conversation
   has_many :messages
