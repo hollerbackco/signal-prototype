@@ -44,8 +44,7 @@ class TextPublisher
       Message.create(obj)
     end
 
-    Signal::NotifyRecipients.new(messages.compact).run
-
+    Signal::NotifyRecipients.on_new_message(messages.compact)
     MetricsPublisher.publish(@sender, "text:create")
 
   end
