@@ -112,14 +112,15 @@ class Membership < ActiveRecord::Base
   end
 
   def members
-    others.map do |other|
-      {
-          id: other.id,
-          name: other.also_known_as(for: user),
-          username: other.username,
-          is_blocked: user.muted?(other)
-      }
-    end
+    # others.map do |other|
+    #   {
+    #       id: other.id,
+    #       name: other.also_known_as(for: user),
+    #       username: other.username,
+    #       is_blocked: user.muted?(other)
+    #   }
+    #end
+    Membership.where(:conversation_id => conversation_id).select([:username, :user_id, :following]).map { |e| {:username => e.username, :user_id => e.user_id, :following => e.following } }
   end
 
   def following?
@@ -199,7 +200,7 @@ class Membership < ActiveRecord::Base
 
   def as_json(opts={})
     options = {}
-    options = options.merge(methods: [:name, :unread_count, :is_deleted, :is_archived])
+    options = options.merge(methods: [:name, :unread_count, :is_deleted, :is_archived, :members])
     options = options.merge(except: [:updated_at, :conversation_id])
     options = options.merge(opts)
     obj = super(options)
