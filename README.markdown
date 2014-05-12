@@ -46,10 +46,6 @@ Every response is contained by an envelope. That is, each response has a predict
         },
         "data": {
             ...
-        },
-        "pagination": {
-            "next_url": "...",
-            "next_max_id": "13872296"
         }
     }
 
@@ -97,7 +93,7 @@ number
 ### POST /verify
 Verifies a users phone number.  Code is a four characters long and sent
 to the users phone as a text
-  
+
     params
         phone*
         code*
@@ -172,26 +168,39 @@ returned.
           data: [{
               type: "conversation",
               sync: {
+                  created_at: timestamp,
+                  updated_at: timestamp
+                  last_message_at: timestamp,
                   id: 1,
-                  name: "Jeff",
+                  is_archived: false,
+                  is_deleted: false,
+                  name: "Has anyone seen the blue nile?",
                   unread_count: 2,
                   is_deleted: false,
                   most_recent_thumb_url: "http://url",
                   most_recent_subtitle: "hello",
-                  last_message_at: timestamp
+                  members: [ { username: "joe", user_id: 1, following: true }, { username: "yogi", user_id: 2, following: false } ]
+
               }
           },{
               type: "message",
               sync: {
-                  guid: "aldsfkj-asdfkj-sdf",
-                  conversation_id: 12,
-                  url: "http://url",
-                  thumb_url: "http://thumburl",
-                  subtitle: "hello",
-                  sent_at: timestamp,
-                  created_at: timestamp
-                  sender_name: "Sender Name",
-                  needs_reply: true
+                  "created_at": "2014-05-11T21:16:17+00:00",
+                  "needs_reply": true,
+                  "sender_name": "yogi",
+                  "sent_at": "2014-05-11T21:16:17+00:00",
+                  "type": "text",
+                  "conversation_id": 2,
+                  "sender_id": 17,
+                  "user": {
+                      "name": "yogi"
+                  },
+                  "is_deleted": false,
+                  "text": {
+                      "guid": "afd15239-f042-4458-92ba-162b49e05a0b",
+                      "text": "Yea. I've seen it..really good movie"
+                  },
+                  "is_read": false
               }
           }]
       }
@@ -200,47 +209,66 @@ returned.
 ## CONVERSATIONS
 
 ### POST /me/conversations
-create a conversation
+create a new conversation
 
     params
         access_token*     string
         invites*          array of phone numbers
-        part_urls*        array of part urls
+        name*             string
 
     response
         {
-          data: {
-            id: 1,
-            unread_count: 10,
-            members: [list of users],
-            invites: [{phone: "+18885558888"}],
-            videos: [{
-              isRead: false,
-              id: 1,
-              created_at: timestamp,
-              url: "http://url",
-              meta: {}
-            }]
-          }
+          "data": {
+                  "created_at": "2014-05-12T17:27:36+00:00",
+                  "deleted_at": null,
+                  "following": true,
+                  "id": 8,
+                  "is_archived": false,
+                  "last_message_at": "2014-05-12T17:27:36+00:00",
+                  "most_recent_subtitle": null,
+                  "most_recent_thumb_url": null,
+                  "name": "how's life?",
+                  "user_id": 16,
+                  "unread_count": 0,
+                  "is_deleted": false,
+                  "members": [
+                      {
+                          "username": "yogi",
+                          "user_id": 17,
+                          "following": false
+                      },
+                      {
+                          "username": "me",
+                          "user_id": 16,
+                          "following": true
+                      }
+                  ],
+                  "updated_at": "2014-05-12T17:27:36+00:00"
+              }
         }
 
 
-### POST /me/conversations/:id/videos/parts
-Creates a video stitch request, marks videos as read.
+### POST /me/conversations/:id/text
+create a new text message in conversation :id
 
     params
-        access_token*      string
-        urls**             string     send a url location of the file
-        part_urls**        string     bucket/key
-        subtitle           string
-        watched_ids        array of strings
+        access_token*   string
+        guid*           string
+        text*           string
 
     response
         {
-          data: {
-            guid: "asfd,
-          }
+            "data": {
+                "conversation_id": 2,
+                "created_at": "2014-05-12T17:25:32+00:00",
+                "guid": "aed15239-f042-4458-92ba-162b49e05a0b",
+                "id": 2,
+                "text": "whats up man?",
+                "updated_at": "2014-05-12T17:25:32+00:00",
+                "user_id": 16
         }
+
+
 
 ### GET /me/conversations/:id/members
 get info about a conversation
@@ -250,29 +278,18 @@ get info about a conversation
 
     response
         {
-          data: [list of users]
-        }
-
-### POST /me/conversations/:id/goodbye
-
-    params
-        dwatched_id*       string
-      
-    response
-        {
-          data: nil
-        }
-
-
-### POST /me/conversations/:id/leave
-get info about a conversation
-
-    params
-        access_token*     string
-
-    response
-        {
-          data: nil
+          data: [
+                    {
+                        "username": "me",
+                        "user_id": 16,
+                        "following": true
+                    },
+                    {
+                        "username": "yogi",
+                        "user_id": 17,
+                        "following": false
+                    }
+                ]
         }
 
 ### POST /me/conversations/:id/watch_all
@@ -285,7 +302,7 @@ watch all unread messages of a conversation or specific types of messages (text,
     response
        {
          data: nil
-       }	
+       }
 
 ### POST /me/conversations/:id/archive
 archive a conversation
@@ -308,52 +325,79 @@ archive a conversation
             unread_count: 0,
             is_deleted: false,
             updated_at: "2014-04-29T12:58:02-04:00"
-         }    
+         }
         }
 
-## DEPRECATED
-
-### GET /me/conversations
-list of conversations
+### POST /me/conversations/:id/follow
+follow a conversation
 
     params
-        access_token*     string
+        access_token*   string
 
     response
         {
-          data: [{
-            unread_count: 10,
-            members: [list of users],
-            invites: [{phone: "+18885558888"}],
-            videos: [{
-              isRead: false,
-              id: 1,
-              created_at: timestamp,
-              url: "http://url",
-              meta: {}
-            }]
-          }]
+            data: nil
         }
 
-
-
-### POST /me/videos/:id/read
-mark a video as read
+### POST /me/conversations/:id/unfollow
+unfollow a conversation
 
     params
-        access_token*     string
+        access_token*   string
 
     response
         {
-          data: {
-            conversation_id: 1,
-            id: 18,
-            created_at: timestamp,
-            isRead: true,
-            user: {..},
-            url: ""
-          }
+            data: nil
         }
+
+### GET /me/conversations/:id/messages
+Get all of the messages in the conversation (both read and unread)
+
+    params
+        access_token*   string
+
+    response
+        {
+            "data": [
+                     {
+                         "created_at": "2014-05-12T17:25:32+00:00",
+                         "needs_reply": false,
+                         "sender_name": "me",
+                         "sent_at": "2014-05-12T17:25:32+00:00",
+                         "type": "text",
+                         "conversation_id": 2,
+                         "sender_id": 16,
+                         "user": {
+                             "name": "me"
+                         },
+                         "is_deleted": false,
+                         "text": {
+                             "guid": "aed15239-f042-4458-92ba-162b49e05a0b",
+                             "text": "whats up man?"
+                         },
+                         "is_read": true
+                     },
+                     {
+                         "created_at": "2014-05-11T21:16:17+00:00",
+                         "needs_reply": true,
+                         "sender_name": "yogi",
+                         "sent_at": "2014-05-11T21:16:17+00:00",
+                         "type": "text",
+                         "conversation_id": 2,
+                         "sender_id": 17,
+                         "user": {
+                             "name": "yogi"
+                         },
+                         "is_deleted": false,
+                         "text": {
+                             "guid": "afd15239-f042-4458-92ba-162b49e05a0b",
+                             "text": "Yea. I've seen it..really good movie"
+                         },
+                         "is_read": false
+                     }
+                 ]
+        }
+
 
 TODO
 ----
