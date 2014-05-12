@@ -3,7 +3,6 @@ API
 
 1. Main web api;
 2. Sidekiq background workers;
-3. Poller services listens to video-stitch-ready sqs queue. Marks stitched; videos as complete.
 
 Design Principles and Resources
 -------------------------------
@@ -17,8 +16,7 @@ http://dl.dropboxusercontent.com/u/1579953/talks/modern_architecture.pdf
 
 Server
 ------
-production server is located at http://www.hollerback.co/api/
-dev server is located at http://lit-sea-1934.herokuapp.com/api/
+production server is located at http://signal-prototype.herokuapp.com/api/
 
 
 Dependencies
@@ -31,7 +29,7 @@ Installing Locally
 ------------------
 
     bundle install
-    createdb hollerback_dev
+    createdb signal_dev
     rake db:migrate
     rerun -- thin start
 
