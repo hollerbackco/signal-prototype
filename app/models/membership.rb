@@ -120,7 +120,7 @@ class Membership < ActiveRecord::Base
     #       is_blocked: user.muted?(other)
     #   }
     #end
-    Membership.where(:conversation_id => conversation_id).select([:username, :user_id, :following]).map { |e| {:username => e.username, :user_id => e.user_id, :following => e.following } }
+    Membership.joins("inner join users on memberships.user_id = users.id").where(:conversation_id => conversation_id).select([:username, :user_id, :following]).map { |e| {:username => e.username,:user_id => e.user_id, :following => e.following } }
   end
 
   def following?
