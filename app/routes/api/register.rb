@@ -55,19 +55,14 @@ module SignalApp
     end
 
     post '/verify' do
-      unless ensure_params(:phone, :code)
+      unless ensure_params(:phone, :code, :password)
         return error_json 400, msg: "Missing required params"
       end
 
       user = User.find_by_phone(params[:phone])
       is_new = (user.blank? || user.new?) ? true : false
 
-      if (params['password'])
-        authenticate(:phone_password_code)
-      else
-        #TODO: Deprecate this ASAP
-        authenticate(:phone_code)
-      end
+      authenticate(:phone_password_code)
 
 
       #authenticate(:password)

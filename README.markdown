@@ -397,6 +397,29 @@ Get all of the messages in the conversation (both read and unread)
                  ]
         }
 
+## Invites
+
+### POST /me/invites
+explicit invites endpoint through add friends
+
+    params
+        access_token*
+        invites*    array of emails and phones
+
+    response
+        data: nil
+
+### POST /me/invites/confirm
+a confirmation endpoint for when a user sends a text
+
+    params
+        access_token*
+        invites*    array of phones
+
+    response
+        data: nil
+
+
 
 TODO
 ----
