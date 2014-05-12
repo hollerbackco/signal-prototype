@@ -97,6 +97,7 @@ to the users phone as a text
         code*
         device_token*
         platform*
+        password*
 
     response
         {
