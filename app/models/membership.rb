@@ -198,9 +198,13 @@ class Membership < ActiveRecord::Base
     end
   end
 
+  def sender_name
+    conversation.creator.also_known_as(:for => user)
+  end
+
   def as_json(opts={})
     options = {}
-    options = options.merge(methods: [:name, :unread_count, :is_deleted, :is_archived, :members])
+    options = options.merge(methods: [:name, :unread_count, :is_deleted, :is_archived, :members, :sender_name])
     options = options.merge(except: [:updated_at, :conversation_id])
     options = options.merge(opts)
     obj = super(options)
