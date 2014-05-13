@@ -164,44 +164,63 @@ returned.
 
     response
       {
-          data: [{
-              type: "conversation",
-              sync: {
-                  created_at: timestamp,
-                  updated_at: timestamp
-                  last_message_at: timestamp,
-                  id: 1,
-                  is_archived: false,
-                  is_deleted: false,
-                  name: "Has anyone seen the blue nile?",
-                  unread_count: 2,
-                  is_deleted: false,
-                  most_recent_thumb_url: "http://url",
-                  most_recent_subtitle: "hello",
-                  members: [ { username: "joe", user_id: 1, following: true }, { username: "yogi", user_id: 2, following: false } ]
-
+          "data": [
+              {
+                  "type": "conversation",
+                  "sync": {
+                      "created_at": "2014-05-12T17:27:36+00:00",
+                      "deleted_at": null,
+                      "following": true,
+                      "id": 8,
+                      "is_archived": false,
+                      "last_message_at": "2014-05-12T17:27:36+00:00",
+                      "most_recent_subtitle": null,
+                      "most_recent_thumb_url": null,
+                      "name": "how's life?",
+                      "unseen_count": "0",
+                      "user_id": 16,
+                      "unread_count": "0",
+                      "is_deleted": false,
+                      "members": [
+                          {
+                              "username": "yogi",
+                              "user_id": 17,
+                              "following": false,
+                              "name": "yogi"
+                          },
+                          {
+                              "username": "me",
+                              "user_id": 16,
+                              "following": true,
+                              "name": "me"
+                          }
+                      ],
+                      "sender_name": "me",
+                      "updated_at": "2014-05-12T17:27:36+00:00"
+                  }
+              },
+              {
+                  "type": "message",
+                  "sync": {
+                      "created_at": "2014-05-11T21:16:17+00:00",
+                      "needs_reply": true,
+                      "sender_name": "yogi",
+                      "sent_at": "2014-05-11T21:16:17+00:00",
+                      "type": "text",
+                      "conversation_id": 2,
+                      "sender_id": 17,
+                      "user": {
+                          "name": "yogi"
+                      },
+                      "is_deleted": false,
+                      "text": {
+                          "guid": "afd15239-f042-4458-92ba-162b49e05a0b",
+                          "text": "Yea. I've seen it..really good movie"
+                      },
+                      "is_read": false
+                  }
               }
-          },{
-              type: "message",
-              sync: {
-                  "created_at": "2014-05-11T21:16:17+00:00",
-                  "needs_reply": true,
-                  "sender_name": "yogi",
-                  "sent_at": "2014-05-11T21:16:17+00:00",
-                  "type": "text",
-                  "conversation_id": 2,
-                  "sender_id": 17,
-                  "user": {
-                      "name": "yogi"
-                  },
-                  "is_deleted": false,
-                  "text": {
-                      "guid": "afd15239-f042-4458-92ba-162b49e05a0b",
-                      "text": "Yea. I've seen it..really good movie"
-                  },
-                  "is_read": false
-              }
-          }]
+              ]
       }
 
 
